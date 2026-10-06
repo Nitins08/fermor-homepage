@@ -2,22 +2,28 @@
 
 @layer base {
   :root {
-    --background: #fafaf9;
-    --foreground: #0f172a;
-    --card: #ffffff;
-    --card-foreground: #0f172a;
-    --border: #e2e8f0;
-    --input: #e2e8f0;
-    --primary: #0f172a;
-    --primary-foreground: #ffffff;
-    --accent: #047857;
-    --accent-light: #ecfdf5;
-    --muted: #64748b;
-    --muted-bg: #f8fafc;
+    --background: #050B18;
+    --background-surface: #071426;
+    --background-panel: #0A1D35;
+    --background-card: #0D2747;
+    --border-hairline: #0D2747;
+    --border-subtle: #123A63;
+    --border-accent: rgba(59, 130, 246, 0.4);
+
+    --foreground: #F8FAFC;
+    --foreground-muted: #94A3B8;
+    --foreground-dim: #64748B;
+
+    --blue-primary: #2563EB;
+    --blue-electric: #3B82F6;
+    --blue-highlight: #60A5FA;
+    --cyan-subtle: #67E8F9;
+    --emerald-positive: #34D399;
+    --rose-negative: #F87171;
   }
 
   * {
-    border-color: var(--border);
+    border-color: var(--border-hairline);
   }
 
   html {
@@ -25,23 +31,25 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    background-color: #050B18;
+    color: #F8FAFC;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: #050B18;
+    color: #F8FAFC;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   /* Accessible focus rings */
   :focus-visible {
-    outline: 2px solid #0f172a;
+    outline: 2px solid #3B82F6;
     outline-offset: 2px;
   }
 
-  /* Range slider custom styling for realistic fintech feel */
+  /* Luxury range slider */
   input[type="range"] {
-    accent-color: #047857;
+    accent-color: #3B82F6;
   }
 }
 
@@ -50,15 +58,109 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Subtle fintech grid pattern */
-.bg-grid-subtle {
-  background-size: 24px 24px;
-  background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+/* Luxury 3D Perspective and Transform utilities */
+.perspective-container {
+  perspective: 1200px;
 }
 
-/* Smooth transitions */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+/* Subtle luxury financial terminal grid */
+.bg-navy-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(18, 58, 99, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 58, 99, 0.25) 1px, transparent 1px);
+}
+
+.bg-navy-radial {
+  background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, rgba(7, 20, 38, 0.8) 60%, #050B18 100%);
+}
+
+/* Luxury card with rim light and layered depth */
+.luxury-glass {
+  background: rgba(10, 29, 53, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(18, 58, 99, 0.6);
+  box-shadow: 
+    0 10px 30px -10px rgba(5, 11, 24, 0.8),
+    0 0 0 1px rgba(59, 130, 246, 0.08) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.luxury-glass-interactive {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.luxury-glass-interactive:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 
+    0 20px 40px -15px rgba(5, 11, 24, 0.9),
+    0 0 25px -5px rgba(59, 130, 246, 0.25),
+    0 1px 0 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+/* Brand Reveal Animation Keyframes */
+@keyframes markStroke {
+  0% {
+    stroke-dashoffset: 200;
+    opacity: 0.2;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes logoShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-mark-stroke {
+  stroke-dasharray: 200;
+  animation: markStroke 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.logo-shimmer {
+  background: linear-gradient(
+    90deg,
+    #F8FAFC 0%,
+    #F8FAFC 40%,
+    #67E8F9 50%,
+    #F8FAFC 60%,
+    #F8FAFC 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: logoShimmer 2.4s ease-in-out 1;
+}
+
+/* Smooth motion control */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

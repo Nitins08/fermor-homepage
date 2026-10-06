@@ -7,45 +7,44 @@ export function TrustEthics() {
   const pillars = [
     {
       icon: EyeOff,
-      title: "Zero Ads. Zero Sponsored Products.",
+      title: "Zero Ads. Zero Sponsored Pitches.",
       description:
-        "We never sell your screen real estate to loan sharks, predatory personal loan providers, or high-commission insurance agents. Our tool designs stay completely uncompromised.",
+        "We never sell screen real estate to loan brokers, speculative crypto exchanges, or commission-hungry agents. The interface remains pure and uncompromised.",
     },
     {
       icon: Lock,
       title: "100% Client-Side Privacy",
       description:
-        "Every single calculation on Fermor — from home loan prepayments to multi-decade SIP projections — runs locally in your personal browser engine. No uninvited database storage.",
+        "Every single calculation on Fermor — from home loan prepayments to multi-decade SIP projections — runs locally in your personal browser memory. Zero server storage.",
     },
     {
       icon: ShieldCheck,
-      title: "Direct Mutual Plans Exclusively",
+      title: "Direct Mutual Funds Exclusively",
       description:
-        "We never route you to Regular mutual fund plans that quietly shave off 0.75% - 1.25% in recurring distributor trailing fees every year. 100% of your gains compound for you.",
+        "We never route you to Regular mutual fund plans that shave off 0.75% - 1.25% in recurring distributor trailing commissions every year. 100% of your compounding stays yours.",
     },
     {
       icon: Scale,
       title: "Educational Non-Advisory Clarity",
       description:
-        "We don't sell get-rich-quick tips or speculative derivatives. We equip thoughtful Indian families and professionals with institutional math so they make self-reliant decisions.",
+        "We don't sell get-rich-quick tips or derivatives gambles. We equip thoughtful Indian families and professionals with institutional math so they make sovereign decisions.",
     },
   ];
 
   return (
-    <section className="py-20 bg-[#FAFAF9] border-b border-slate-200">
+    <section className="py-24 bg-[#050B18] border-b border-[#0D2747]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-200 text-slate-800 text-xs font-semibold mb-3">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-            <span>ETHICAL ARCHITECTURE</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
+            <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+            <span>07 / ETHICAL INTEGRITY & PRIVACY CHARTER</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight">
-            Built on trust, not transaction fees.
+          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
+            Engineered on trust, not transaction churn.
           </h2>
-          <p className="mt-3 text-slate-600 text-base leading-relaxed">
+          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
             Most financial websites in India make money by pushing high-interest personal loans or
-            selling user contact details to insurance telemarketers. Fermor operates on the opposite
-            philosophy.
+            selling user contact details to insurance telemarketers. Fermor operates on strict client-first principles.
           </p>
         </div>
 
@@ -55,13 +54,13 @@ export function TrustEthics() {
             return (
               <div
                 key={pillar.title}
-                className="p-6 bg-white rounded-xl border border-slate-200 shadow-xs space-y-3"
+                className="p-6 bg-[#071426] rounded-2xl border border-[#123A63] hover:border-blue-500/40 hover:bg-[#0A1D35]/50 transition-all shadow-xl space-y-4"
               >
-                <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200/70 flex items-center justify-center text-emerald-800">
+                <div className="w-10 h-10 rounded-xl bg-[#0A1D35] border border-[#123A63] flex items-center justify-center text-cyan-400">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900 leading-snug">{pillar.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{pillar.description}</p>
+                <h3 className="text-base font-semibold text-white leading-snug">{pillar.title}</h3>
+                <p className="text-xs text-slate-300 leading-relaxed font-light">{pillar.description}</p>
               </div>
             );
           })}

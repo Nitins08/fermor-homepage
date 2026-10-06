@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { MessageSquareText, Sparkles, Check } from "lucide-react";
+import { MessageSquareText, Sparkles, Check, ArrowRight } from "lucide-react";
 
 interface QueryScenario {
   id: string;
@@ -32,7 +32,7 @@ const SCENARIOS: QueryScenario[] = [
       {
         label: "Nifty 50 Historical 10Y CAGR",
         value: "12.4% (Post-LTCG ~10.8%)",
-        note: "After new 12.5% Long-Term Capital Gains tax above ₹1.25L threshold.",
+        note: "After revised 12.5% Long-Term Capital Gains tax above ₹1.25L threshold.",
       },
       {
         label: "The Spread / Net Equity Premium",
@@ -63,7 +63,7 @@ const SCENARIOS: QueryScenario[] = [
       {
         label: "Total Capital Outlay Difference",
         value: "₹93.1L vs ₹89.4L",
-        note: "Step-up saves cashflow strain in early career years when expenses like home setup are high.",
+        note: "Step-up saves cashflow strain in early career years when life expenses are higher.",
       },
     ],
     verdict:
@@ -98,99 +98,105 @@ const SCENARIOS: QueryScenario[] = [
 ];
 
 export function AskFermorSandbox() {
-  const [selectedId, setSelectedId] = useState<string>("prepay-vs-sip");
-  const current = SCENARIOS.find((s) => s.id === selectedId) || SCENARIOS[0];
+  const [activeScenario, setActiveScenario] = useState<string>("prepay-vs-sip");
+  const current = SCENARIOS.find((s) => s.id === activeScenario) || SCENARIOS[0];
 
   return (
-    <section id="ask" className="py-20 bg-[#FAFAF9] border-b border-slate-200">
+    <section id="intelligence" className="py-24 bg-[#050B18] border-b border-[#0D2747]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-200 text-slate-800 text-xs font-semibold mb-3">
-            <MessageSquareText className="w-3.5 h-3.5 text-emerald-700" />
-            <span>FINANCIAL INTELLIGENCE ENGINE</span>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
+            <MessageSquareText className="w-3.5 h-3.5 text-cyan-400" />
+            <span>05 / NATURAL SCENARIO INTELLIGENCE</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight">
-            Ask complex money questions. Get arithmetic, not opinions.
+          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
+            Ask complex trade-offs. Get mathematical clarity.
           </h2>
-          <p className="mt-3 text-slate-600 text-base leading-relaxed">
-            Personal finance is full of trade-offs. Fermor tests the numbers across tax regimes,
-            interest rates, and investment compounding to deliver clear decisions.
+          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
+            Financial decisions are never one-dimensional. Explore realistic scenarios tested against
+            Indian tax legislation, market volatility benchmarks, and cash flow constraints.
           </p>
         </div>
 
         {/* Interactive Query Sandbox */}
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          {/* Query Selector Pills */}
-          <div className="p-4 sm:p-6 bg-slate-50 border-b border-slate-200">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-              Explore Common Financial Dilemmas:
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Query Selection Prompts (4 cols) */}
+          <div className="lg:col-span-4 space-y-3">
+            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              Select Real-World Financial Query:
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {SCENARIOS.map((sc) => {
-                const isSelected = sc.id === selectedId;
-                return (
-                  <button
-                    key={sc.id}
-                    type="button"
-                    onClick={() => setSelectedId(sc.id)}
-                    className={`p-3.5 rounded-lg border text-left transition-all ${
+            {SCENARIOS.map((scenario) => {
+              const isSelected = scenario.id === activeScenario;
+              return (
+                <button
+                  key={scenario.id}
+                  type="button"
+                  onClick={() => setActiveScenario(scenario.id)}
+                  className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all ${
+                    isSelected
+                      ? "bg-[#0A1D35] text-white border-blue-400 shadow-xl shadow-blue-950/40"
+                      : "bg-[#071426] text-slate-300 border-[#123A63] hover:border-slate-400 hover:bg-[#0A1D35]/50"
+                  }`}
+                >
+                  <span
+                    className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full ${
                       isSelected
-                        ? "bg-slate-900 text-white border-slate-900 shadow-xs"
-                        : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                        ? "bg-blue-600 text-white"
+                        : "bg-[#050B18] text-cyan-300 border border-[#123A63]"
                     }`}
                   >
-                    <span
-                      className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
-                        isSelected
-                          ? "bg-emerald-900 text-emerald-300"
-                          : "bg-slate-100 text-slate-600"
-                      }`}
-                    >
-                      {sc.tag}
-                    </span>
-                    <div className="text-xs font-semibold mt-2 line-clamp-2">{sc.question}</div>
-                  </button>
-                );
-              })}
-            </div>
+                    {scenario.tag}
+                  </span>
+                  <div className="text-sm font-semibold text-white mt-2 leading-snug">
+                    {scenario.question}
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Engine Output Console */}
-          <div className="p-6 sm:p-8 space-y-6">
-            <div className="flex items-start gap-3">
-              <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5">
-                <Sparkles className="w-4 h-4" />
+          {/* Detailed Intelligence Breakdown (8 cols) */}
+          <div className="lg:col-span-8 bg-[#071426] p-6 sm:p-8 rounded-2xl border border-[#123A63] shadow-xl space-y-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-cyan-400 mb-2">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Deterministic Calculation Model</span>
               </div>
-              <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-bold text-slate-900">
-                  {current.question}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{current.answerSummary}</p>
-              </div>
+              <h3 className="text-xl font-bold text-white leading-snug">{current.question}</h3>
+              <p className="mt-2 text-sm text-slate-300 leading-relaxed font-light">
+                {current.answerSummary}
+              </p>
             </div>
 
-            {/* Arithmetic Breakdown Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Numerical breakdown matrix */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2">
               {current.mathBreakdown.map((item) => (
-                <div key={item.label} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                  <div className="text-xs font-medium text-slate-500">{item.label}</div>
-                  <div className="text-lg font-bold text-slate-900 num-tabular">{item.value}</div>
-                  <div className="text-[11px] text-slate-500 leading-snug">{item.note}</div>
+                <div
+                  key={item.label}
+                  className="p-4 bg-[#0A1D35]/70 rounded-xl border border-[#123A63] space-y-2 hover:border-blue-500/40 transition-colors"
+                >
+                  <div className="text-[11px] font-mono font-medium text-slate-400 uppercase">
+                    {item.label}
+                  </div>
+                  <div className="text-base font-bold text-white num-tabular font-mono">
+                    {item.value}
+                  </div>
+                  <div className="text-[11px] text-slate-400 leading-snug font-light">{item.note}</div>
                 </div>
               ))}
             </div>
 
             {/* Verdict Box */}
-            <div className="p-4 sm:p-5 bg-emerald-50/80 rounded-xl border border-emerald-200/80 flex items-start gap-3">
-              <div className="p-1 rounded-full bg-emerald-600 text-white shrink-0 mt-0.5">
-                <Check className="w-3.5 h-3.5" />
+            <div className="p-5 bg-[#050B18] rounded-xl border border-blue-500/40 flex items-start gap-3.5">
+              <div className="p-1.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 shrink-0 mt-0.5">
+                <Check className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-emerald-900">
-                  Data-Grounded Recommendation
+                <div className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300">
+                  Data-Grounded Synthesis
                 </div>
-                <div className="text-sm font-semibold text-emerald-950 mt-1 leading-relaxed">
+                <div className="text-sm font-medium text-slate-200 mt-1 leading-relaxed">
                   {current.verdict}
                 </div>
               </div>

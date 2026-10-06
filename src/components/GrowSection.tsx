@@ -35,33 +35,33 @@ export function GrowSection() {
   const deltaMaturity = stepUpMaturity - flatMaturity;
 
   return (
-    <section id="grow" className="py-20 bg-[#FAFAF9] border-b border-slate-200">
+    <section id="grow" className="py-24 bg-[#050B18] border-b border-[#0D2747]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-200 text-slate-800 text-xs font-semibold mb-3">
-            <Compass className="w-3.5 h-3.5 text-emerald-700" />
-            <span>03 / GROW</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
+            <Compass className="w-3.5 h-3.5 text-cyan-400" />
+            <span>03 / GROW & STEP-UP COMPOUNDING</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
             Compounding you can visualize and control.
           </h2>
-          <p className="mt-3 text-slate-600 text-base leading-relaxed">
-            A static investment plan falls victim to lifestyle inflation. By stepping up your monthly
-            SIP by just 10% as your career advances, you shorten your financial independence runway
+          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
+            A static investment plan falls prey to lifestyle creep. By stepping up your monthly SIP
+            by just 10% alongside annual career increments, you accelerate your financial independence milestone
             by over a decade.
           </p>
         </div>
 
         {/* Interactive Step-Up Simulation Lab */}
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="bg-[#071426] rounded-2xl border border-[#123A63] shadow-xl overflow-hidden">
           <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Input Controls (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="space-y-2">
-                <div className="flex justify-between items-center text-sm font-semibold text-slate-800">
+              <div className="space-y-2.5">
+                <div className="flex justify-between items-center text-sm font-medium text-slate-200">
                   <label htmlFor="base-sip-range">Starting Monthly SIP</label>
-                  <span className="font-mono text-base font-bold text-slate-900 num-tabular">
+                  <span className="font-mono text-base font-bold text-white num-tabular">
                     ₹{baseSip.toLocaleString("en-IN")}/mo
                   </span>
                 </div>
@@ -73,9 +73,9 @@ export function GrowSection() {
                   step={2500}
                   value={baseSip}
                   onChange={(e) => setBaseSip(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-[#0A1D35] rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-[11px] text-slate-400 font-mono">
+                <div className="flex justify-between text-[11px] text-slate-500 font-mono">
                   <span>₹5,000</span>
                   <span>₹50,000</span>
                   <span>₹1,00,000</span>
@@ -83,20 +83,20 @@ export function GrowSection() {
               </div>
 
               {/* Investment Horizon */}
-              <div className="space-y-2">
-                <div className="text-sm font-semibold text-slate-800">
+              <div className="space-y-2.5">
+                <div className="text-sm font-medium text-slate-200">
                   Investment Horizon (Tenure)
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-xs">
+                <div className="grid grid-cols-4 gap-2.5 text-xs font-mono">
                   {[10, 15, 20, 25].map((yrs) => (
                     <button
                       key={yrs}
                       type="button"
                       onClick={() => setTenureYears(yrs)}
-                      className={`py-2 rounded-lg border font-semibold transition-all ${
+                      className={`py-2.5 rounded-xl border font-semibold transition-all ${
                         tenureYears === yrs
-                          ? "bg-slate-900 text-white border-slate-900"
-                          : "bg-[#FAFAF9] text-slate-700 border-slate-200 hover:bg-slate-100"
+                          ? "bg-blue-600 text-white border-blue-400 shadow-md"
+                          : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
                       }`}
                     >
                       {yrs} Yrs
@@ -106,40 +106,39 @@ export function GrowSection() {
               </div>
 
               {/* Annual Step-Up Percentage */}
-              <div className="space-y-2">
-                <div className="text-sm font-semibold text-slate-800">
+              <div className="space-y-2.5">
+                <div className="text-sm font-medium text-slate-200">
                   Annual Contribution Step-Up (%)
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-xs">
+                <div className="grid grid-cols-4 gap-2.5 text-xs font-mono">
                   {[0, 5, 10, 15].map((pct) => (
                     <button
                       key={pct}
                       type="button"
                       onClick={() => setStepUpPercent(pct)}
-                      className={`py-2 rounded-lg border font-semibold transition-all ${
+                      className={`py-2.5 rounded-xl border font-semibold transition-all ${
                         stepUpPercent === pct
-                          ? "bg-emerald-700 text-white border-emerald-700"
-                          : "bg-[#FAFAF9] text-slate-700 border-slate-200 hover:bg-slate-100"
+                          ? "bg-blue-600 text-white border-blue-400 shadow-md"
+                          : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
                       }`}
                     >
                       +{pct}% /yr
                     </button>
                   ))}
                 </div>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-[11px] text-slate-400 font-light">
                   {stepUpPercent > 0
                     ? `Your SIP increases by ${stepUpPercent}% every 12 months with annual salary increments.`
-                    : "Flat SIP without adjusting for annual salary promotions."}
+                    : "Static flat SIP without increment compounding."}
                 </p>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 text-xs space-y-1.5">
-                <div className="font-semibold text-slate-700">Calculated Assumption Baseline:</div>
-                <div className="text-slate-500">
-                  • 12.0% Historical annualized Nifty Equity Index CAGR
-                  <br />
-                  • Monthly compounding compounding reinvestment
-                  <br />• 0% upfront distribution leakage (Direct Plans)
+              <div className="p-4 bg-[#050B18] rounded-xl border border-[#0D2747] text-xs space-y-1.5 font-light">
+                <div className="font-semibold text-slate-300">Simulation Foundation:</div>
+                <div className="text-slate-400 space-y-1 font-mono text-[11px]">
+                  <div>• 12.0% Historical annualized Nifty Equity Index CAGR</div>
+                  <div>• Monthly compounding with automated reinvestment</div>
+                  <div>• 0.0% upfront distribution leakage (Direct Plans)</div>
                 </div>
               </div>
             </div>
@@ -148,38 +147,38 @@ export function GrowSection() {
             <div className="lg:col-span-7 space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Flat SIP outcome */}
-                <div className="p-5 rounded-xl border border-slate-200 bg-[#FAFAF9] space-y-2">
-                  <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <div className="p-5 rounded-xl border border-[#0D2747] bg-[#050B18] space-y-2">
+                  <div className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">
                     Flat SIP (No Step-Up)
                   </div>
-                  <div className="text-2xl font-bold text-slate-800 num-tabular">
+                  <div className="text-2xl font-bold text-white num-tabular font-mono">
                     ₹{(flatMaturity / 10000000).toFixed(2)} Crores
                   </div>
-                  <div className="text-xs text-slate-500">
+                  <div className="text-xs text-slate-400 font-mono">
                     Total Invested: ₹{(flatInvested / 100000).toFixed(1)} Lakhs
                   </div>
-                  <div className="pt-2 border-t border-slate-200 text-xs text-slate-600 font-medium">
+                  <div className="pt-2 border-t border-[#0D2747] text-xs text-slate-300 font-medium">
                     Wealth Created: ₹{((flatMaturity - flatInvested) / 100000).toFixed(1)} Lakhs
                   </div>
                 </div>
 
                 {/* Step-Up outcome */}
-                <div className="p-5 rounded-xl border border-emerald-300 bg-emerald-50/70 space-y-2 ring-1 ring-emerald-300">
+                <div className="p-5 rounded-xl border border-blue-500/60 bg-[#0A1D35] space-y-2 shadow-lg shadow-blue-950/40">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider">
+                    <span className="text-xs font-mono font-semibold text-cyan-300 uppercase tracking-wider">
                       +{stepUpPercent}% Annual Step-Up
                     </span>
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-700 text-white rounded">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-blue-600 text-white rounded">
                       Exponential
                     </span>
                   </div>
-                  <div className="text-2xl font-bold text-emerald-950 num-tabular">
+                  <div className="text-2xl font-bold text-white num-tabular font-mono">
                     ₹{(stepUpMaturity / 10000000).toFixed(2)} Crores
                   </div>
-                  <div className="text-xs text-slate-600">
+                  <div className="text-xs text-slate-300 font-mono">
                     Total Invested: ₹{(stepUpInvested / 100000).toFixed(1)} Lakhs
                   </div>
-                  <div className="pt-2 border-t border-emerald-200 text-xs text-emerald-900 font-semibold">
+                  <div className="pt-2 border-t border-[#123A63] text-xs text-emerald-400 font-semibold">
                     Wealth Created: ₹{((stepUpMaturity - stepUpInvested) / 100000).toFixed(1)} Lakhs
                   </div>
                 </div>
@@ -187,46 +186,48 @@ export function GrowSection() {
 
               {/* Difference Banner */}
               {stepUpPercent > 0 && (
-                <div className="p-5 bg-slate-900 text-white rounded-xl space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                <div className="p-5 bg-[#0A1D35] border border-blue-500/40 rounded-xl space-y-2">
+                  <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>The Compounding Advantage</span>
+                    <span>The Step-Up Power Law</span>
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold num-tabular">
-                    +₹{(deltaMaturity / 10000000).toFixed(2)} Crores Extra Wealth
+                  <div className="text-2xl font-bold text-white num-tabular font-mono">
+                    +₹{(deltaMaturity / 10000000).toFixed(2)} Crores Additional Corpus
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    By simply dedicating 10% of every increment to scaling your SIP, your final
-                    corpus expands by over{" "}
-                    {Math.round(((stepUpMaturity - flatMaturity) / flatMaturity) * 100)}% without
-                    needing a larger initial starting capital.
+                  <p className="text-xs text-slate-300 leading-relaxed font-light">
+                    By dedicating 10% of each annual salary increment toward stepping up your SIP, your final wealth
+                    expands by over{" "}
+                    <span className="font-semibold text-cyan-300 font-mono">
+                      {Math.round(((stepUpMaturity - flatMaturity) / flatMaturity) * 100)}%
+                    </span>{" "}
+                    without requiring a larger starting principal.
                   </p>
                 </div>
               )}
 
               {/* Milestone Forecast Timeline */}
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                  Accumulation Milestones Along the Journey:
+              <div className="p-5 bg-[#050B18] rounded-xl border border-[#0D2747] space-y-3">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+                  Accumulation Milestones Along the Trajectory:
                 </span>
-                <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                  <div className="p-2.5 bg-white rounded-lg border border-slate-200">
+                <div className="grid grid-cols-3 gap-3 text-center text-xs">
+                  <div className="p-3 bg-[#0A1D35] rounded-xl border border-[#123A63]">
                     <div className="text-[11px] text-slate-400 font-mono">Year 5</div>
-                    <div className="font-bold text-slate-800 mt-0.5 num-tabular">
+                    <div className="font-bold text-white mt-1 num-tabular font-mono">
                       ₹{Math.round((baseSip * 60 * 1.35) / 100000)} Lakhs
                     </div>
                   </div>
-                  <div className="p-2.5 bg-white rounded-lg border border-slate-200">
+                  <div className="p-3 bg-[#0A1D35] rounded-xl border border-[#123A63]">
                     <div className="text-[11px] text-slate-400 font-mono">Year 10</div>
-                    <div className="font-bold text-slate-800 mt-0.5 num-tabular">
+                    <div className="font-bold text-white mt-1 num-tabular font-mono">
                       ₹{Math.round((baseSip * 120 * 2.1) / 100000)} Lakhs
                     </div>
                   </div>
-                  <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-                    <div className="text-[11px] text-emerald-700 font-mono font-semibold">
+                  <div className="p-3 bg-[#0A1D35] rounded-xl border border-blue-500/50">
+                    <div className="text-[11px] text-cyan-400 font-mono font-semibold">
                       Year {tenureYears} (Goal)
                     </div>
-                    <div className="font-bold text-emerald-700 mt-0.5 num-tabular">
+                    <div className="font-bold text-emerald-400 mt-1 num-tabular font-mono">
                       ₹{(stepUpMaturity / 10000000).toFixed(2)} Cr
                     </div>
                   </div>

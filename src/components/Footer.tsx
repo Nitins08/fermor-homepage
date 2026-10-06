@@ -7,62 +7,62 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
+    <footer className="bg-[#050B18] text-slate-400 text-xs border-t border-[#0D2747]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-slate-800/80">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-[#0D2747]">
           {/* Col 1: Brand & Positioning */}
           <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-md bg-emerald-600 flex items-center justify-center text-white font-mono font-bold text-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-[#0A1D35] border border-[#123A63] flex items-center justify-center text-blue-400 font-mono font-bold text-sm shadow-inner">
                 F
               </div>
               <span className="font-semibold text-base tracking-tight text-white">
                 Fermor Technologies
               </span>
             </div>
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Smart financial decisions for India. Free SIP, EMI, home loan, tax, and retirement
-              calculators with zero advertising and institutional-grade mathematics.
+            <p className="text-xs text-slate-400 max-w-sm leading-relaxed font-light">
+              Independent private wealth operating system for India. Institutional-grade SIP, EMI,
+              tax optimization, and retirement planning with zero advertising and client-side privacy.
             </p>
             <div className="flex items-center gap-2 text-[11px] text-slate-500 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-              <span>All Systems Operational • Client-Side Engine</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>All Systems Operational • Client-Side Deterministic Engine</span>
             </div>
           </div>
 
           {/* Col 2: Calculators */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-              Calculators
+          <div className="space-y-3 font-light">
+            <div className="text-xs font-mono font-semibold text-slate-200 uppercase tracking-wider">
+              Terminal Tools
             </div>
             <ul className="space-y-2">
               <li>
-                <a href="#calculators" className="hover:text-white transition-colors">
-                  SIP Calculator
+                <a href="#calculators" className="hover:text-cyan-300 transition-colors">
+                  SIP Compounding Engine
                 </a>
               </li>
               <li>
-                <a href="#grow" className="hover:text-white transition-colors">
+                <a href="#grow" className="hover:text-cyan-300 transition-colors">
                   Step-Up SIP Planner
                 </a>
               </li>
               <li>
-                <a href="#calculators" className="hover:text-white transition-colors">
+                <a href="#calculators" className="hover:text-cyan-300 transition-colors">
                   Home Loan EMI & Prepay
                 </a>
               </li>
               <li>
-                <a href="#understand" className="hover:text-white transition-colors">
-                  New vs Old Tax Regime
+                <a href="#understand" className="hover:text-cyan-300 transition-colors">
+                  Tax Regime Comparator
                 </a>
               </li>
               <li>
-                <a href="#calculators" className="hover:text-white transition-colors">
-                  SWP Retirement Cashflow
+                <a href="#calculators" className="hover:text-cyan-300 transition-colors">
+                  SWP Retirement Runway
                 </a>
               </li>
               <li>
-                <a href="#calculators" className="hover:text-white transition-colors">
+                <a href="#calculators" className="hover:text-cyan-300 transition-colors">
                   PPF & Fixed Deposit
                 </a>
               </li>
@@ -70,68 +70,68 @@ export function Footer() {
           </div>
 
           {/* Col 3: Platform & Products */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-              Platform
+          <div className="space-y-3 font-light">
+            <div className="text-xs font-mono font-semibold text-slate-200 uppercase tracking-wider">
+              Architecture
             </div>
             <ul className="space-y-2">
               <li>
-                <a href="#health-check" className="hover:text-white transition-colors">
+                <a href="#health-check" className="hover:text-cyan-300 transition-colors">
                   Financial Health Audit
                 </a>
               </li>
               <li>
-                <a href="#act" className="hover:text-white transition-colors">
-                  Direct Index Funds (ACT)
+                <a href="#act" className="hover:text-cyan-300 transition-colors">
+                  Direct Asset Tranches
                 </a>
               </li>
               <li>
-                <a href="#ask" className="hover:text-white transition-colors">
-                  Ask Fermor (Intelligence)
+                <a href="#intelligence" className="hover:text-cyan-300 transition-colors">
+                  Scenario Intelligence
                 </a>
               </li>
               <li>
-                <a href="#intelligence" className="hover:text-white transition-colors">
-                  Wallet Impact News
+                <a href="#intelligence-editorial" className="hover:text-cyan-300 transition-colors">
+                  Wallet Policy Desk
                 </a>
               </li>
               <li>
-                <a href="#hero" className="hover:text-white transition-colors">
-                  Portfolio Command Center
+                <a href="#overview" className="hover:text-cyan-300 transition-colors">
+                  Command Center Console
                 </a>
               </li>
             </ul>
           </div>
 
           {/* Col 4: Transparency & Legal */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+          <div className="space-y-3 font-light">
+            <div className="text-xs font-mono font-semibold text-slate-200 uppercase tracking-wider">
               Governance
             </div>
             <ul className="space-y-2">
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Privacy Policy (Zero Trackers)
+                <span className="hover:text-cyan-300 transition-colors cursor-pointer">
+                  Privacy Charter (Zero Trackers)
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Terms of Platform Use
+                <span className="hover:text-cyan-300 transition-colors cursor-pointer">
+                  Platform Terms of Service
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Statutory Disclosures
+                <span className="hover:text-cyan-300 transition-colors cursor-pointer">
+                  Statutory SEBI Disclosures
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  About Fermor Technologies
+                <span className="hover:text-cyan-300 transition-colors cursor-pointer">
+                  Security Architecture
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Contact & Support
+                <span className="hover:text-cyan-300 transition-colors cursor-pointer">
+                  Developer API & Telemetry
                 </span>
               </li>
             </ul>
@@ -140,23 +140,21 @@ export function Footer() {
 
         {/* Regulatory & Educational Disclaimer */}
         <div className="pt-8 space-y-4">
-          <div className="flex items-start gap-2.5 p-4 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
-            <Shield className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2.5 p-4 rounded-xl bg-[#071426] border border-[#123A63] text-[11px] text-slate-400 leading-relaxed font-light">
+            <Shield className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-slate-300">Regulatory Disclaimer: </strong>
-              Fermor Technologies Pvt. Ltd. operates fermor.in as an educational financial technology
-              and calculation platform for Indian users. Fermor is not a SEBI-registered investment
-              advisor, research analyst, or portfolio manager, and does not provide personalized
-              financial, investment, legal, or tax advisory services. All mathematical models,
-              calculators, and simulated projections are provided for analytical and educational
-              evaluation only. Mutual fund investments and equities are subject to market risks; read
-              all scheme-related offer documents carefully before investing.
+              <strong className="text-slate-300 font-medium">Regulatory & Educational Notice: </strong>
+              Fermor Technologies Pvt. Ltd. operates fermor.in as an educational financial decision and calculation
+              system for Indian users. Fermor is not a SEBI-registered investment advisor, research analyst, or portfolio manager,
+              and does not provide personalized investment, legal, or tax advisory services. All mathematical models,
+              calculators, and simulated projections are executed client-side for analytical and educational evaluation only.
+              Mutual fund investments and equities are subject to market risks; read all scheme-related offer documents carefully before investing.
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 font-mono">
             <div>© {currentYear} Fermor Technologies Pvt. Ltd. All rights reserved.</div>
-            <div>Built for Indian Wealth Builders • Zero Ads • Client-Side Privacy</div>
+            <div>Engineered for Indian Wealth Builders • Zero Ads • Client-Side Privacy</div>
           </div>
         </div>
       </div>

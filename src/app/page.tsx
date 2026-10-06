@@ -16,15 +16,15 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAF9] text-slate-900 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="flex flex-col min-h-screen bg-[#050B18] text-slate-100 selection:bg-blue-600 selection:text-white">
       {/* 1. Live Indian Market Micro Ticker */}
       <MarketTicker />
 
-      {/* 2. Primary Navigation Bar */}
+      {/* 2. Primary Navigation Bar with Brand Assembly Reveal */}
       <Navbar />
 
       <main className="flex-1">
-        {/* 3. Hero Section with Interactive Financial Command Center */}
+        {/* 3. Hero Section with Unified 3D Financial Command Console */}
         <Hero />
 
         {/* 4. 60-Second Financial Health Diagnostic Mini-Audit */}
