@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #fafaf9;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --primary: #0f172a;
+    --primary-foreground: #ffffff;
+    --accent: #047857;
+    --accent-light: #ecfdf5;
+    --muted: #64748b;
+    --muted-bg: #f8fafc;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    outline: 2px solid #0f172a;
+    outline-offset: 2px;
+  }
+
+  /* Range slider custom styling for realistic fintech feel */
+  input[type="range"] {
+    accent-color: #047857;
+  }
+}
+
+/* Custom utility for financial numbers */
+.num-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle fintech grid pattern */
+.bg-grid-subtle {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+}
+
+/* Smooth transitions */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
