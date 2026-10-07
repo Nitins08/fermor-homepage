@@ -1,59 +1,46 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-newsreader",
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Fermor — Smart Financial Decisions for India | Wealth, Planning & Calculators",
+  title: "Fermor — Intelligent Capital Architecture",
   description:
-    "Your money, finally in one place. Explore interactive financial command centers, free SIP & tax calculators, portfolio allocation models, and noise-free market intelligence.",
-  keywords: [
-    "Fermor",
-    "SIP Calculator",
-    "Indian Finance",
-    "Mutual Funds India",
-    "Financial Planning",
-    "New vs Old Tax Regime",
-    "Home Loan Prepayment",
-    "Nifty 50",
-    "Wealth Management",
-  ],
-  authors: [{ name: "Fermor Technologies" }],
-  openGraph: {
-    title: "Fermor — Smart Financial Decisions for India",
-    description: "Invest, track and plan in one place. Zero ads, pure math, institutional clarity.",
-    url: "https://fermor.in",
-    siteName: "Fermor",
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Fermor — Smart Financial Decisions for India",
-    description: "Your money, finally in one place. Interactive calculators and financial command center.",
-  },
-  robots: {
-    index: true,
-    follow: true,
+    "Fermor synthesizes fragmented bank feeds, investments, private holdings, and liabilities into a single living balance. Understand, Act, and Grow with clarity.",
+  icons: {
+    icon: "/icon.svg",
   },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth antialiased`}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-      </head>
-      <body className="min-h-screen bg-[#FAFAF9] text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <html
+      lang="en"
+      className={`${newsreader.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-white">
         {children}
       </body>
     </html>

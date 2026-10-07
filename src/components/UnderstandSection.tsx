@@ -1,237 +1,287 @@
 "use client";
 
-import React, { useState } from "react";
-import { PieChart, Calculator, Check, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Sliders, ArrowUpRight, CheckCircle2, AlertCircle } from "lucide-react";
 
-export function UnderstandSection() {
-  const [salary, setSalary] = useState(1500000); // 15 Lakhs
-  const [oldDeductions, setOldDeductions] = useState(250000); // 80C + 80D + HRA
+export default function UnderstandSection() {
+  const [horizon, setHorizon] = useState<"30D" | "90D" | "1Y">("30D");
+  const [sweepActive, setSweepActive] = useState(true);
 
-  // Tax calculations (Budget 2024/2025 revised slabs)
-  const calcNewTax = (income: number) => {
-    const taxable = Math.max(0, income - 75000);
-    if (taxable <= 700000) return 0; // Rebate u/s 87A
-
-    let tax = 0;
-    if (taxable > 1500000) tax += (taxable - 1500000) * 0.3;
-    if (taxable > 1200000) tax += Math.min(taxable - 1200000, 300000) * 0.2;
-    if (taxable > 1000000) tax += Math.min(taxable - 1000000, 200000) * 0.15;
-    if (taxable > 700000) tax += Math.min(taxable - 700000, 300000) * 0.1;
-    if (taxable > 300000) tax += Math.min(taxable - 300000, 400000) * 0.05;
-
-    return Math.round(tax * 1.04); // 4% cess
+  const tableData = {
+    "30D": [
+      {
+        asset: "Treasury Yield Sweeps (4-Wk T-Bills)",
+        custodian: "Fermor Institutional Custody",
+        amount: "$285,000.00",
+        yield: "5.32%",
+        status: "Optimized",
+        statusType: "success",
+      },
+      {
+        asset: "Primary Operating Checking",
+        custodian: "Silicon Valley Bridge",
+        amount: "$142,000.00",
+        yield: "0.05%",
+        status: "Idle Drag",
+        statusType: "warning",
+      },
+      {
+        asset: "Global Core Equity Allocation",
+        custodian: "Interactive Brokers Prime",
+        amount: "$614,500.00",
+        yield: "9.84%",
+        status: "Rebalanced",
+        statusType: "neutral",
+      },
+      {
+        asset: "Direct Seed & Series A LP Interests",
+        custodian: "AngelList / Carta Ledger",
+        amount: "$380,000.00",
+        yield: "Unrealized",
+        status: "Active LP",
+        statusType: "neutral",
+      },
+    ],
+    "90D": [
+      {
+        asset: "Treasury Yield Sweeps (4-Wk T-Bills)",
+        custodian: "Fermor Institutional Custody",
+        amount: "$310,000.00",
+        yield: "5.30%",
+        status: "Optimized",
+        statusType: "success",
+      },
+      {
+        asset: "Primary Operating Checking",
+        custodian: "Silicon Valley Bridge",
+        amount: "$120,000.00",
+        yield: "0.05%",
+        status: "Idle Drag",
+        statusType: "warning",
+      },
+      {
+        asset: "Global Core Equity Allocation",
+        custodian: "Interactive Brokers Prime",
+        amount: "$645,000.00",
+        yield: "11.2%",
+        status: "Rebalanced",
+        statusType: "neutral",
+      },
+      {
+        asset: "Direct Seed & Series A LP Interests",
+        custodian: "AngelList / Carta Ledger",
+        amount: "$380,000.00",
+        yield: "Unrealized",
+        status: "Active LP",
+        statusType: "neutral",
+      },
+    ],
+    "1Y": [
+      {
+        asset: "Treasury Yield Sweeps (4-Wk T-Bills)",
+        custodian: "Fermor Institutional Custody",
+        amount: "$420,000.00",
+        yield: "5.26%",
+        status: "Optimized",
+        statusType: "success",
+      },
+      {
+        asset: "Primary Operating Checking",
+        custodian: "Silicon Valley Bridge",
+        amount: "$95,000.00",
+        yield: "0.05%",
+        status: "Minimized",
+        statusType: "success",
+      },
+      {
+        asset: "Global Core Equity Allocation",
+        custodian: "Interactive Brokers Prime",
+        amount: "$720,000.00",
+        yield: "14.8%",
+        status: "Rebalanced",
+        statusType: "neutral",
+      },
+      {
+        asset: "Direct Seed & Series A LP Interests",
+        custodian: "AngelList / Carta Ledger",
+        amount: "$380,000.00",
+        yield: "Unrealized",
+        status: "Active LP",
+        statusType: "neutral",
+      },
+    ],
   };
-
-  const calcOldTax = (income: number, deductions: number) => {
-    const taxable = Math.max(0, income - 50000 - deductions);
-    if (taxable <= 500000) return 0; // Rebate u/s 87A
-
-    let tax = 0;
-    if (taxable > 1000000) tax += (taxable - 1000000) * 0.3;
-    if (taxable > 500000) tax += Math.min(taxable - 500000, 500000) * 0.2;
-    if (taxable > 250000) tax += Math.min(taxable - 250000, 250000) * 0.05;
-
-    return Math.round(tax * 1.04);
-  };
-
-  const newTax = calcNewTax(salary);
-  const oldTax = calcOldTax(salary, oldDeductions);
-  const diff = Math.abs(oldTax - newTax);
-  const isNewBetter = newTax <= oldTax;
 
   return (
-    <section id="understand" className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
-            <PieChart className="w-3.5 h-3.5 text-emerald-600" />
-            <span>01 / UNDERSTAND TAX & HIDDEN EXPENSES</span>
+    <section id="understand" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+      {/* Editorial Header */}
+      <div className="max-w-3xl mb-14">
+        <div className="font-mono text-xs text-[#006C49] font-semibold uppercase tracking-wider mb-3">
+          02 / 04 — REVELATION
+        </div>
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-primary font-normal leading-[1.15] mb-4">
+          See the whole picture. Without the cognitive clutter.
+        </h2>
+        <p className="font-sans text-sm sm:text-base text-[#4B5563] leading-relaxed">
+          Not an administrative ledger, but a high-fidelity architectural vantage point. Every inflow, burn velocity, and idle penny is indexed into real-time deployable intelligence.
+        </p>
+      </div>
+
+      {/* Modular Dashboard Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Main Analytical Ledger Table */}
+        <div className="lg:col-span-8 bg-white rounded-lg border border-black/[0.08] shadow-sm p-5 sm:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-black/[0.06] mb-6">
+            <div>
+              <span className="font-mono text-[11px] uppercase text-[#4B5563] block font-medium">
+                Analytical Ledger
+              </span>
+              <h3 className="font-sans text-lg text-primary font-semibold">
+                Active Capital Deployments & Flows
+              </h3>
+            </div>
+
+            {/* Horizon Filter Tabs */}
+            <div className="inline-flex p-1 bg-[#F4F4F1] rounded border border-black/[0.05] font-mono text-xs">
+              {(["30D", "90D", "1Y"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setHorizon(tab)}
+                  className={`px-3 py-1 rounded transition-all font-medium ${
+                    horizon === tab
+                      ? "bg-white text-primary font-semibold shadow-sm"
+                      : "text-[#4B5563] hover:text-[#111827]"
+                  }`}
+                >
+                  {tab === "30D" ? "30D Velocity" : tab === "90D" ? "90D Rolling" : "1Y Macro"}
+                </button>
+              ))}
+            </div>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
-            See through the financial noise.
-          </h2>
-          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
-            Most people lose wealth not from bad market timing, but from silent intermediary commissions,
-            unoptimized tax regimes, and fragmented bank accounts. Fermor delivers mathematical clarity on every rupee.
-          </p>
+
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left font-sans text-xs sm:text-sm">
+              <thead>
+                <tr className="text-[#4B5563] font-mono text-[11px] uppercase border-b border-black/[0.06]">
+                  <th className="pb-3 font-medium">Asset / Vessel</th>
+                  <th className="pb-3 font-medium hidden md:table-cell">Custodian</th>
+                  <th className="pb-3 font-medium text-right">Holding</th>
+                  <th className="pb-3 font-medium text-right">Effective Yield</th>
+                  <th className="pb-3 font-medium text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-black/[0.04]">
+                {tableData[horizon].map((row) => (
+                  <tr
+                    key={row.asset}
+                    className="h-14 hover:bg-[#FBFBFA] transition-colors"
+                  >
+                    <td className="font-medium text-[#111827] pr-4">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                            row.statusType === "success"
+                              ? "bg-[#10B981]"
+                              : row.statusType === "warning"
+                              ? "bg-[#D97706]"
+                              : "bg-primary"
+                          }`}
+                        />
+                        <span className="truncate max-w-[220px] sm:max-w-none">{row.asset}</span>
+                      </div>
+                    </td>
+                    <td className="text-[#4B5563] hidden md:table-cell pr-4 truncate">
+                      {row.custodian}
+                    </td>
+                    <td className="font-mono text-right font-medium text-[#111827] pr-4 whitespace-nowrap">
+                      {row.amount}
+                    </td>
+                    <td
+                      className={`font-mono text-right font-medium pr-4 whitespace-nowrap ${
+                        row.statusType === "warning" ? "text-[#92400E]" : "text-[#006C49]"
+                      }`}
+                    >
+                      {row.yield}
+                    </td>
+                    <td className="text-right">
+                      <span
+                        className={`inline-flex px-2 py-0.5 rounded font-mono text-[10px] font-medium ${
+                          row.statusType === "success"
+                            ? "bg-[#ECFDF5] text-[#065F46] border border-[#10B981]/20"
+                            : row.statusType === "warning"
+                            ? "bg-[#FFFBEB] text-[#78350F] border border-[#D97706]/20 font-semibold"
+                            : "bg-[#F4F4F1] text-[#4B5563]"
+                        }`}
+                      >
+                        {row.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* Feature Grid: 2 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Interactive Mini Tool (New vs Old Tax Regime) */}
-          <div className="lg:col-span-7 bg-[#F7FAF8] p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] shadow-xs space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-[#DDE8E1]">
-              <div className="flex items-center gap-2.5">
-                <Calculator className="w-4 h-4 text-emerald-600" />
-                <span className="text-sm font-semibold text-[#10251B]">
-                  Interactive Tax Regime Comparator
-                </span>
-              </div>
-              <span className="text-[11px] font-mono px-2 py-0.5 bg-white text-[#0B3D2E] border border-[#DDE8E1] rounded">
-                FY 2025-26 Budget Slabs
+        {/* Strategic Insight Rail (Right Column) */}
+        <div className="lg:col-span-4 flex flex-col gap-6">
+          {/* Liquidity Ratio Card */}
+          <div className="bg-white p-6 rounded-lg border border-black/[0.08] shadow-sm">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-[#4B5563] block mb-1 font-medium">
+              True Liquidity Ratio
+            </span>
+            <div className="flex items-baseline justify-between mb-3">
+              <span className="font-mono text-3xl text-primary font-semibold">
+                4.8x Coverage
+              </span>
+              <span className="font-mono text-xs text-[#006C49] font-medium bg-[#ECFDF5] px-2 py-0.5 rounded">
+                Surplus ($188k)
               </span>
             </div>
-
-            {/* Slider 1: Gross Annual Salary */}
-            <div className="space-y-2">
-              <div className="flex justify-between items-center text-sm font-medium text-[#10251B]">
-                <label htmlFor="salary-slider">Gross Annual CTC / Salary</label>
-                <span className="font-mono text-base font-bold text-[#0B3D2E] num-tabular">
-                  ₹{(salary / 100000).toFixed(1)} Lakhs
-                </span>
-              </div>
-              <input
-                id="salary-slider"
-                type="range"
-                min={600000}
-                max={4000000}
-                step={50000}
-                value={salary}
-                onChange={(e) => setSalary(Number(e.target.value))}
-                className="w-full h-2 bg-[#E5ECE7] rounded-lg appearance-none cursor-pointer accent-emerald-600"
-              />
-              <div className="flex justify-between text-[11px] text-[#82998B] font-mono">
-                <span>₹6 Lakhs</span>
-                <span>₹20 Lakhs</span>
-                <span>₹40 Lakhs</span>
-              </div>
+            <p className="font-sans text-xs text-[#4B5563] leading-relaxed mb-4">
+              Calculated net of 6-month burn commitment, pending quarterly tax distributions ($24,000), and venture capital calls.
+            </p>
+            {/* Allocation Ratio Bar */}
+            <div className="w-full bg-[#ECECE8] h-2 rounded-full overflow-hidden flex">
+              <div className="bg-primary h-full w-[65%]" title="Operating 65%" />
+              <div className="bg-[#10B981] h-full w-[20%]" title="Reserve 20%" />
+              <div className="bg-[#D97706] h-full w-[15%]" title="Tax Escrow 15%" />
             </div>
-
-            {/* Slider 2: Old Regime Deductions */}
-            <div className="space-y-2">
-              <div className="flex justify-between items-center text-sm font-medium text-[#10251B]">
-                <label htmlFor="deductions-slider">Old Regime Deductions (80C + 80D + HRA)</label>
-                <span className="font-mono text-base font-bold text-emerald-600 num-tabular">
-                  ₹{(oldDeductions / 100000).toFixed(2)} Lakhs
-                </span>
-              </div>
-              <input
-                id="deductions-slider"
-                type="range"
-                min={50000}
-                max={500000}
-                step={25000}
-                value={oldDeductions}
-                onChange={(e) => setOldDeductions(Number(e.target.value))}
-                className="w-full h-2 bg-[#E5ECE7] rounded-lg appearance-none cursor-pointer accent-emerald-600"
-              />
-              <div className="flex justify-between text-[11px] text-[#82998B] font-mono">
-                <span>₹50,000 (Min)</span>
-                <span>Standard ₹2.5L</span>
-                <span>₹5,00,000 (Max)</span>
-              </div>
-            </div>
-
-            {/* Comparison Cards */}
-            <div className="grid grid-cols-2 gap-4 pt-2">
-              <div
-                className={`p-4 rounded-xl border text-left transition-all ${
-                  isNewBetter
-                    ? "bg-white border-emerald-500 shadow-xs ring-1 ring-emerald-500/20"
-                    : "bg-[#F2F7F4] border-[#DDE8E1]"
-                }`}
-              >
-                <div className="flex justify-between items-center text-xs font-mono font-semibold">
-                  <span className={isNewBetter ? "text-emerald-800" : "text-[#4B6354]"}>
-                    New Tax Regime
-                  </span>
-                  {isNewBetter && (
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-600 text-white rounded">
-                      Optimal
-                    </span>
-                  )}
-                </div>
-                <div className="text-xl sm:text-2xl font-bold text-[#10251B] mt-2 num-tabular font-mono">
-                  ₹{newTax.toLocaleString("en-IN")}
-                </div>
-                <div className="text-[11px] text-[#4B6354] mt-1">₹75,000 Standard Deduction included</div>
-              </div>
-
-              <div
-                className={`p-4 rounded-xl border text-left transition-all ${
-                  !isNewBetter
-                    ? "bg-white border-emerald-500 shadow-xs ring-1 ring-emerald-500/20"
-                    : "bg-[#F2F7F4] border-[#DDE8E1]"
-                }`}
-              >
-                <div className="flex justify-between items-center text-xs font-mono font-semibold">
-                  <span className={!isNewBetter ? "text-emerald-800" : "text-[#4B6354]"}>
-                    Old Tax Regime
-                  </span>
-                  {!isNewBetter && (
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-600 text-white rounded">
-                      Optimal
-                    </span>
-                  )}
-                </div>
-                <div className="text-xl sm:text-2xl font-bold text-[#10251B] mt-2 num-tabular font-mono">
-                  ₹{oldTax.toLocaleString("en-IN")}
-                </div>
-                <div className="text-[11px] text-[#4B6354] mt-1">Based on ₹{(oldDeductions / 100000).toFixed(1)}L declared</div>
-              </div>
-            </div>
-
-            {/* Recommendation Banner */}
-            <div className="p-4 bg-white border border-[#DDE8E1] text-[#10251B] rounded-xl flex items-center justify-between text-xs shadow-2xs">
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-normal text-[#4B6354]">
-                  {isNewBetter
-                    ? `Choosing the New Regime saves you ₹${diff.toLocaleString("en-IN")} in annual taxes.`
-                    : `Your heavy deductions make the Old Regime cheaper by ₹${diff.toLocaleString("en-IN")}.`}
-                </span>
-              </div>
-              <a
-                href="#calculators"
-                className="font-bold text-emerald-700 hover:text-emerald-800 shrink-0 ml-3 flex items-center gap-1 font-mono text-xs"
-              >
-                <span>Full Model</span>
-                <ArrowRight className="w-3 h-3" />
-              </a>
+            <div className="flex justify-between items-center text-[10px] text-[#4B5563] font-mono mt-2">
+              <span>Operating (65%)</span>
+              <span>Reserve (20%)</span>
+              <span>Tax (15%)</span>
             </div>
           </div>
 
-          {/* Right Column: Key Understanding Differentiators */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="p-6 bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] shadow-2xs space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-white border border-[#DDE8E1] flex items-center justify-center text-[#0B3D2E] font-mono font-bold text-xs shadow-2xs">
-                01
+          {/* Automated Savings Sweep Engine Card */}
+          <div className="bg-white p-6 rounded-lg border border-black/[0.08] shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#ECFDF5] text-[#065F46] font-mono text-[10px] font-medium mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                <span>Proactive Optimization</span>
               </div>
-              <h3 className="text-base font-semibold text-[#10251B]">
-                Unmasking Hidden Intermediary TER
-              </h3>
-              <p className="text-sm text-[#4B6354] leading-relaxed">
-                Regular mutual funds quietly charge an extra 0.75% to 1.25% every single year in
-                distributor commissions. Over 20 years, that eats up to 25% of your final wealth.
-                Fermor defaults strictly to Direct Plans.
+              <h4 className="font-sans text-base text-primary font-semibold mb-2">
+                Automated Savings Sweep
+              </h4>
+              <p className="font-sans text-xs text-[#4B5563] leading-relaxed">
+                Currently sweeping <span className="font-semibold text-[#111827]">$18,400 monthly</span> across cash excess into overnight Treasury repos at 5.28%.
               </p>
             </div>
 
-            <div className="p-6 bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] shadow-2xs space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-white border border-[#DDE8E1] flex items-center justify-center text-[#0B3D2E] font-mono font-bold text-xs shadow-2xs">
-                02
-              </div>
-              <h3 className="text-base font-semibold text-[#10251B]">
-                Unified Portfolio Classification
-              </h3>
-              <p className="text-sm text-[#4B6354] leading-relaxed">
-                Break free from fragmented broker silos. View your equity mutual funds, PPF, NPS,
-                direct stocks, and gold in one cohesive asset allocation model with genuine XIRR.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] shadow-2xs space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-white border border-[#DDE8E1] flex items-center justify-center text-[#0B3D2E] font-mono font-bold text-xs shadow-2xs">
-                03
-              </div>
-              <h3 className="text-base font-semibold text-[#10251B]">
-                LTCG Tax-Harvesting Thresholds
-              </h3>
-              <p className="text-sm text-[#4B6354] leading-relaxed">
-                Track your ₹1.25 Lakh annual long-term capital gains exemption under the revised Finance Act
-                rules. Rebalance intelligently each March without triggering unnecessary tax drag.
-              </p>
+            <div className="mt-5 pt-4 border-t border-black/[0.06] flex items-center justify-between">
+              <span className="font-mono text-xs text-[#006C49] font-semibold flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                {sweepActive ? "Active Sweep Engine" : "Engine Paused"}
+              </span>
+              <button
+                onClick={() => setSweepActive(!sweepActive)}
+                className="p-1.5 hover:bg-[#F4F4F1] rounded text-[#4B5563] transition-colors"
+                title="Toggle Sweep Engine"
+              >
+                <Sliders className="w-4 h-4 text-[#006C49]" />
+              </button>
             </div>
           </div>
         </div>

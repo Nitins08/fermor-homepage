@@ -1,238 +1,264 @@
 "use client";
 
-import React, { useState } from "react";
-import { Compass, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Check, Target, TrendingUp, Sparkles, Plus, CheckCircle2 } from "lucide-react";
 
-export function GrowSection() {
-  const [baseSip, setBaseSip] = useState(15000);
-  const [tenureYears, setTenureYears] = useState(15);
-  const [stepUpPercent, setStepUpPercent] = useState(10);
-  const returnRate = 0.12; // 12% benchmark
+export default function GrowSection() {
+  const [horizonYears, setHorizonYears] = useState<3 | 5 | 10>(10);
+  const [boostedGoals, setBoostedGoals] = useState<Record<string, boolean>>({});
 
-  // Calculate Flat SIP
-  const months = tenureYears * 12;
-  const monthlyRate = returnRate / 12;
-  const flatInvested = baseSip * months;
-  const flatMaturity = Math.round(
-    (baseSip * (Math.pow(1 + monthlyRate, months) - 1) * (1 + monthlyRate)) / monthlyRate
-  );
+  const horizonMetrics = {
+    3: {
+      statusQuo: "$1.68M",
+      compound: "$1.94M",
+      delta: "+$260K Delta",
+      curvePath: "M 0 200 C 250 180, 500 150, 800 110",
+      polygonPoints: "0,200 250,180 500,150 800,110 800,240 0,240",
+      endY: 110,
+      yieldEliminated: "$48,600",
+      cycles: "36 Cycles",
+    },
+    5: {
+      statusQuo: "$1.85M",
+      compound: "$2.42M",
+      delta: "+$570K Delta",
+      curvePath: "M 0 200 C 250 175, 500 130, 800 70",
+      polygonPoints: "0,200 250,175 500,130 800,70 800,240 0,240",
+      endY: 70,
+      yieldEliminated: "$92,400",
+      cycles: "60 Cycles",
+    },
+    10: {
+      statusQuo: "$2.14M",
+      compound: "$3.42M",
+      delta: "+$1.28M Delta",
+      curvePath: "M 0 200 C 250 170, 500 110, 800 30",
+      polygonPoints: "0,200 250,170 500,110 800,30 800,240 0,240",
+      endY: 30,
+      yieldEliminated: "$184,200",
+      cycles: "120 Cycles",
+    },
+  };
 
-  // Calculate Step-Up SIP
-  let stepUpInvested = 0;
-  let stepUpMaturity = 0;
-  let currentMonthly = baseSip;
+  const current = horizonMetrics[horizonYears];
 
-  for (let y = 0; y < tenureYears; y++) {
-    for (let m = 0; m < 12; m++) {
-      stepUpInvested += currentMonthly;
-      const remainingMonths = months - (y * 12 + m);
-      stepUpMaturity += currentMonthly * Math.pow(1 + monthlyRate, remainingMonths);
-    }
-    currentMonthly = Math.round(currentMonthly * (1 + stepUpPercent / 100));
-  }
-  stepUpMaturity = Math.round(stepUpMaturity);
-
-  const deltaMaturity = stepUpMaturity - flatMaturity;
+  const toggleBoost = (goalKey: string) => {
+    setBoostedGoals((prev) => ({ ...prev, [goalKey]: !prev[goalKey] }));
+  };
 
   return (
-    <section id="grow" className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
-            <Compass className="w-3.5 h-3.5 text-emerald-600" />
-            <span>03 / GROW & STEP-UP COMPOUNDING</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
-            Compounding you can visualize and control.
-          </h2>
-          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
-            A static investment plan falls prey to lifestyle creep. By stepping up your monthly SIP
-            by just 10% alongside annual career increments, you accelerate your financial independence milestone
-            by over a decade.
-          </p>
+    <section id="grow" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+      {/* Editorial Header */}
+      <div className="max-w-3xl mb-14">
+        <div className="font-mono text-xs text-[#006C49] font-semibold uppercase tracking-wider mb-3">
+          04 / 04 — TRAJECTORY
         </div>
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-primary font-normal leading-[1.12] mb-4">
+          Turn clarity into compound momentum.
+        </h2>
+        <p className="font-sans text-sm sm:text-base text-[#4B5563] leading-relaxed">
+          The difference between passive drift and deliberate optimization compounds exponentially over 3, 5, and 10-year horizons. See how continuous yield orchestration reshapes your runway.
+        </p>
+      </div>
 
-        {/* Interactive Step-Up Simulation Lab */}
-        <div className="bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] shadow-xs overflow-hidden">
-          <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Input Controls (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="space-y-2.5">
-                <div className="flex justify-between items-center text-sm font-medium text-[#10251B]">
-                  <label htmlFor="base-sip-range">Starting Monthly SIP</label>
-                  <span className="font-mono text-base font-bold text-[#0B3D2E] num-tabular">
-                    ₹{baseSip.toLocaleString("en-IN")}/mo
-                  </span>
-                </div>
-                <input
-                  id="base-sip-range"
-                  type="range"
-                  min={5000}
-                  max={100000}
-                  step={2500}
-                  value={baseSip}
-                  onChange={(e) => setBaseSip(Number(e.target.value))}
-                  className="w-full h-2 bg-[#E5ECE7] rounded-lg appearance-none cursor-pointer accent-emerald-600"
-                />
-                <div className="flex justify-between text-[11px] text-[#82998B] font-mono">
-                  <span>₹5,000</span>
-                  <span>₹50,000</span>
-                  <span>₹1,00,000</span>
-                </div>
-              </div>
-
-              {/* Investment Horizon */}
-              <div className="space-y-2.5">
-                <div className="text-sm font-medium text-[#10251B]">
-                  Investment Horizon (Tenure)
-                </div>
-                <div className="grid grid-cols-4 gap-2.5 text-xs font-mono">
-                  {[10, 15, 20, 25].map((yrs) => (
-                    <button
-                      key={yrs}
-                      type="button"
-                      onClick={() => setTenureYears(yrs)}
-                      className={`py-2.5 rounded-xl border font-semibold transition-all ${
-                        tenureYears === yrs
-                          ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                          : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
-                      }`}
-                    >
-                      {yrs} Yrs
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Annual Step-Up Percentage */}
-              <div className="space-y-2.5">
-                <div className="text-sm font-medium text-[#10251B]">
-                  Annual Contribution Step-Up (%)
-                </div>
-                <div className="grid grid-cols-4 gap-2.5 text-xs font-mono">
-                  {[0, 5, 10, 15].map((pct) => (
-                    <button
-                      key={pct}
-                      type="button"
-                      onClick={() => setStepUpPercent(pct)}
-                      className={`py-2.5 rounded-xl border font-semibold transition-all ${
-                        stepUpPercent === pct
-                          ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                          : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
-                      }`}
-                    >
-                      +{pct}% /yr
-                    </button>
-                  ))}
-                </div>
-                <p className="text-[11px] text-[#4B6354]">
-                  {stepUpPercent > 0
-                    ? `Your SIP increases by ${stepUpPercent}% every 12 months with annual salary increments.`
-                    : "Static flat SIP without increment compounding."}
-                </p>
-              </div>
-
-              <div className="p-4 bg-white rounded-xl border border-[#DDE8E1] text-xs space-y-1.5 shadow-2xs">
-                <div className="font-semibold text-[#10251B]">Simulation Foundation:</div>
-                <div className="text-[#4B6354] space-y-1 font-mono text-[11px]">
-                  <div>• 12.0% Historical annualized Nifty Equity Index CAGR</div>
-                  <div>• Monthly compounding with automated reinvestment</div>
-                  <div>• 0.0% upfront distribution leakage (Direct Plans)</div>
-                </div>
-              </div>
+      {/* Projection Simulator & Goal Gauges */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Interactive Trajectory Curve Panel */}
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-xl border border-black/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-black/[0.06] mb-6">
+            <div>
+              <span className="font-mono text-[11px] uppercase text-[#4B5563] block font-medium">
+                {horizonYears}-Year Trajectory Model
+              </span>
+              <h3 className="font-sans text-lg text-primary font-semibold">
+                Status Quo vs. Fermor Orchestrated Execution
+              </h3>
             </div>
 
-            {/* Results Comparison (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Flat SIP outcome */}
-                <div className="p-5 rounded-xl border border-[#DDE8E1] bg-white space-y-2 shadow-2xs">
-                  <div className="text-xs font-mono font-medium text-[#4B6354] uppercase tracking-wider">
-                    Flat SIP (No Step-Up)
-                  </div>
-                  <div className="text-2xl font-bold text-[#10251B] num-tabular font-mono">
-                    ₹{(flatMaturity / 10000000).toFixed(2)} Crores
-                  </div>
-                  <div className="text-xs text-[#82998B] font-mono">
-                    Total Invested: ₹{(flatInvested / 100000).toFixed(1)} Lakhs
-                  </div>
-                  <div className="pt-2 border-t border-[#DDE8E1] text-xs text-[#4B6354] font-medium">
-                    Wealth Created: ₹{((flatMaturity - flatInvested) / 100000).toFixed(1)} Lakhs
-                  </div>
-                </div>
+            {/* Horizon Switcher */}
+            <div className="inline-flex p-1 bg-[#F4F4F1] rounded border border-black/[0.05] font-mono text-xs">
+              {([3, 5, 10] as const).map((years) => (
+                <button
+                  key={years}
+                  onClick={() => setHorizonYears(years)}
+                  className={`px-3 py-1.5 rounded transition-all font-medium ${
+                    horizonYears === years
+                      ? "bg-primary-container text-white font-semibold shadow-sm"
+                      : "text-[#4B5563] hover:text-[#111827]"
+                  }`}
+                >
+                  {years}-Year
+                </button>
+              ))}
+            </div>
+          </div>
 
-                {/* Step-Up outcome */}
-                <div className="p-5 rounded-xl border border-emerald-500/50 bg-white space-y-2 shadow-xs ring-1 ring-emerald-500/20">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-mono font-semibold text-emerald-800 uppercase tracking-wider">
-                      +{stepUpPercent}% Annual Step-Up
-                    </span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-emerald-600 text-white rounded">
-                      Exponential
-                    </span>
-                  </div>
-                  <div className="text-2xl font-bold text-[#10251B] num-tabular font-mono">
-                    ₹{(stepUpMaturity / 10000000).toFixed(2)} Crores
-                  </div>
-                  <div className="text-xs text-[#82998B] font-mono">
-                    Total Invested: ₹{(stepUpInvested / 100000).toFixed(1)} Lakhs
-                  </div>
-                  <div className="pt-2 border-t border-[#DDE8E1] text-xs text-emerald-700 font-semibold">
-                    Wealth Created: ₹{((stepUpMaturity - stepUpInvested) / 100000).toFixed(1)} Lakhs
-                  </div>
-                </div>
-              </div>
+          {/* SVG Projection Visualization */}
+          <div className="w-full h-64 sm:h-72 bg-[#FBFBFA] rounded-lg border border-black/[0.05] p-4 relative overflow-hidden flex flex-col justify-between">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 800 240"
+              preserveAspectRatio="none"
+            >
+              {/* Grid rules */}
+              <line x1="0" y1="60" x2="800" y2="60" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
+              <line x1="0" y1="120" x2="800" y2="120" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
+              <line x1="0" y1="180" x2="800" y2="180" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
 
-              {/* Difference Banner */}
-              {stepUpPercent > 0 && (
-                <div className="p-5 bg-[#F2F7F4] border border-emerald-500/30 rounded-xl space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-800 text-xs font-mono font-semibold uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>The Step-Up Power Law</span>
-                  </div>
-                  <div className="text-2xl font-bold text-[#10251B] num-tabular font-mono">
-                    +₹{(deltaMaturity / 10000000).toFixed(2)} Crores Additional Corpus
-                  </div>
-                  <p className="text-xs text-[#4B6354] leading-relaxed">
-                    By dedicating 10% of each annual salary increment toward stepping up your SIP, your final wealth
-                    expands by over{" "}
-                    <span className="font-semibold text-emerald-800 font-mono">
-                      {Math.round(((stepUpMaturity - flatMaturity) / flatMaturity) * 100)}%
-                    </span>{" "}
-                    without requiring a larger starting principal.
-                  </p>
-                </div>
-              )}
+              {/* Status Quo Path (Inertia) */}
+              <path
+                d="M 0 200 C 250 185, 500 170, 800 150"
+                fill="none"
+                stroke="#9CA3AF"
+                strokeWidth="2"
+                strokeDasharray="4 4"
+              />
 
-              {/* Milestone Forecast Timeline */}
-              <div className="p-5 bg-white rounded-xl border border-[#DDE8E1] space-y-3 shadow-2xs">
-                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354]">
-                  Accumulation Milestones Along the Trajectory:
-                </span>
-                <div className="grid grid-cols-3 gap-3 text-center text-xs">
-                  <div className="p-3 bg-[#F7FAF8] rounded-xl border border-[#DDE8E1]">
-                    <div className="text-[11px] text-[#4B6354] font-mono">Year 5</div>
-                    <div className="font-bold text-[#10251B] mt-1 num-tabular font-mono">
-                      ₹{Math.round((baseSip * 60 * 1.35) / 100000)} Lakhs
-                    </div>
-                  </div>
-                  <div className="p-3 bg-[#F7FAF8] rounded-xl border border-[#DDE8E1]">
-                    <div className="text-[11px] text-[#4B6354] font-mono">Year 10</div>
-                    <div className="font-bold text-[#10251B] mt-1 num-tabular font-mono">
-                      ₹{Math.round((baseSip * 120 * 2.1) / 100000)} Lakhs
-                    </div>
-                  </div>
-                  <div className="p-3 bg-[#F2F7F4] rounded-xl border border-emerald-500/30">
-                    <div className="text-[11px] text-emerald-800 font-mono font-semibold">
-                      Year {tenureYears} (Goal)
-                    </div>
-                    <div className="font-bold text-emerald-700 mt-1 num-tabular font-mono">
-                      ₹{(stepUpMaturity / 10000000).toFixed(2)} Cr
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* Fill area under optimized */}
+              <polygon
+                points={current.polygonPoints}
+                fill="#006C49"
+                fillOpacity="0.08"
+              />
+
+              {/* Fermor Path (Optimized Compounding) */}
+              <path
+                d={current.curvePath}
+                fill="none"
+                stroke="#006C49"
+                strokeWidth="3"
+                className="transition-all duration-700 ease-out"
+              />
+
+              <circle cx="800" cy={current.endY} r="5" fill="#10B981" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="800" cy="150" r="4" fill="#9CA3AF" />
+            </svg>
+
+            <div className="flex flex-wrap justify-between items-center text-xs font-mono text-[#4B5563] pt-2 border-t border-black/[0.04]">
+              <span>Baseline: $1.48M</span>
+              <span className="text-[#4B5563]">Status Quo: {current.statusQuo}</span>
+              <span className="text-[#006C49] font-semibold bg-[#ECFDF5] px-2 py-0.5 rounded border border-[#10B981]/20">
+                Fermor Compound: {current.compound} ({current.delta})
+              </span>
+            </div>
+          </div>
+
+          {/* Metric Footers */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div className="p-3.5 bg-[#FBFBFA] rounded-lg border border-black/[0.06]">
+              <span className="font-mono text-[10px] text-[#4B5563] uppercase block font-medium">
+                Yield Drag Eliminated
+              </span>
+              <span className="font-mono text-xl text-primary font-semibold">
+                {current.yieldEliminated}
+              </span>
+            </div>
+
+            <div className="p-3.5 bg-[#FBFBFA] rounded-lg border border-black/[0.06]">
+              <span className="font-mono text-[10px] text-[#4B5563] uppercase block font-medium">
+                Automated Sweep Cadence
+              </span>
+              <span className="font-mono text-xl text-[#006C49] font-semibold">
+                {current.cycles}
+              </span>
+            </div>
+
+            <div className="p-3.5 bg-[#FBFBFA] rounded-lg border border-black/[0.06]">
+              <span className="font-mono text-[10px] text-[#4B5563] uppercase block font-medium">
+                Downside Volatility
+              </span>
+              <span className="font-mono text-xl text-[#111827] font-semibold">
+                -42% StDev
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Goal Progress Gauges (Right Column) */}
+        <div className="lg:col-span-4 flex flex-col gap-4">
+          {/* Goal 1 */}
+          <div className="bg-white p-6 rounded-xl border border-black/[0.08] shadow-sm">
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="font-sans text-sm font-semibold text-primary">
+                Family Endowment Fund
+              </h4>
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] font-semibold">
+                Ahead (+14 mo)
+              </span>
+            </div>
+            <p className="font-sans text-xs text-[#4B5563] mb-3">
+              Target: $2,500,000 liquid capital milestone.
+            </p>
+            <div className="w-full bg-[#ECECE8] h-2.5 rounded-full overflow-hidden mb-2">
+              <div
+                className="bg-[#10B981] h-full transition-all duration-700"
+                style={{ width: boostedGoals["endowment"] ? "84%" : "72%" }}
+              />
+            </div>
+            <div className="flex justify-between items-center text-xs font-mono text-[#4B5563]">
+              <span>
+                {boostedGoals["endowment"] ? "$2,100,000" : "$1,800,000"} / $2,500,000
+              </span>
+              <button
+                onClick={() => toggleBoost("endowment")}
+                className="font-semibold text-primary hover:underline"
+              >
+                {boostedGoals["endowment"] ? "84% (Boost Active)" : "72% (+Boost)"}
+              </button>
+            </div>
+          </div>
+
+          {/* Goal 2 */}
+          <div className="bg-white p-6 rounded-xl border border-black/[0.08] shadow-sm">
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="font-sans text-sm font-semibold text-primary">
+                Venture Angel Reserve
+              </h4>
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#F4F4F1] text-[#4B5563] font-medium">
+                On Schedule
+              </span>
+            </div>
+            <p className="font-sans text-xs text-[#4B5563] mb-3">
+              Target: $500,000 deployable allocation.
+            </p>
+            <div className="w-full bg-[#ECECE8] h-2.5 rounded-full overflow-hidden mb-2">
+              <div
+                className="bg-primary h-full transition-all duration-700"
+                style={{ width: boostedGoals["venture"] ? "96%" : "88%" }}
+              />
+            </div>
+            <div className="flex justify-between items-center text-xs font-mono text-[#4B5563]">
+              <span>
+                {boostedGoals["venture"] ? "$480,000" : "$440,000"} / $500,000
+              </span>
+              <button
+                onClick={() => toggleBoost("venture")}
+                className="font-semibold text-primary hover:underline"
+              >
+                {boostedGoals["venture"] ? "96% (Boost Active)" : "88% (+Boost)"}
+              </button>
+            </div>
+          </div>
+
+          {/* Goal 3 */}
+          <div className="bg-white p-6 rounded-xl border border-black/[0.08] shadow-sm">
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="font-sans text-sm font-semibold text-primary">
+                Debt-Free Real Property
+              </h4>
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] font-semibold">
+                Realized
+              </span>
+            </div>
+            <p className="font-sans text-xs text-[#4B5563] mb-3">
+              Primary residence unencumbered.
+            </p>
+            <div className="w-full bg-[#ECECE8] h-2.5 rounded-full overflow-hidden mb-2">
+              <div className="bg-[#10B981] h-full w-full" />
+            </div>
+            <div className="flex justify-between items-center text-xs font-mono text-[#4B5563]">
+              <span>Zero Senior Liens</span>
+              <span className="font-semibold text-[#006C49]">100% Equity</span>
             </div>
           </div>
         </div>

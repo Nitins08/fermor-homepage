@@ -1,262 +1,244 @@
 "use client";
 
-import React, { useState } from "react";
-import { Zap, ShieldCheck, ArrowRight, Check } from "lucide-react";
+import { useState } from "react";
+import { Zap, CheckCircle2, ShieldCheck, ArrowRight, Loader2, FileText, X } from "lucide-react";
 
-interface InvestmentCategory {
-  id: string;
-  name: string;
-  badge: string;
-  minTicket: string;
-  recommendedFor: string;
-  riskProfile: string;
-  instruments: {
-    name: string;
-    expenseRatio: string;
-    volatility: string;
-    rationale: string;
-  }[];
-}
+export default function ActSection() {
+  const [sliderVal, setSliderVal] = useState(85000);
+  const [status, setStatus] = useState<"idle" | "authorizing" | "authorized">("idle");
+  const [showReceipt, setShowReceipt] = useState(false);
 
-const CATEGORIES: InvestmentCategory[] = [
-  {
-    id: "index",
-    name: "Broad Market Index Funds",
-    badge: "Core Anchor (50-60%)",
-    minTicket: "₹500 / month",
-    recommendedFor: "Foundational compounding tracking India's top 50 enterprises",
-    riskProfile: "Moderate Market Risk",
-    instruments: [
-      {
-        name: "UTI Nifty 50 Index Fund (Direct-Growth)",
-        expenseRatio: "0.18% TER",
-        volatility: "Standard Beta 1.0",
-        rationale: "Lowest tracking error across 5-year cycles; zero distributor commission.",
-      },
-      {
-        name: "Nippon India Nifty Next 50 Junior BeES ETF",
-        expenseRatio: "0.22% TER",
-        volatility: "Higher Beta 1.15",
-        rationale: "Exposure to India's fastest-growing innovators (ranks 51-100).",
-      },
-    ],
-  },
-  {
-    id: "flexicap",
-    name: "Flexi-Cap & Midcap Funds",
-    badge: "Alpha Growth (20-30%)",
-    minTicket: "₹1,000 / month",
-    recommendedFor: "Dynamic capital reallocation across market capitalizations",
-    riskProfile: "Moderate-High Risk",
-    instruments: [
-      {
-        name: "Parag Parikh Flexi Cap Fund (Direct-Growth)",
-        expenseRatio: "0.62% TER",
-        volatility: "Controlled Downside",
-        rationale: "Long-term value discipline with partial global diversification buffer.",
-      },
-      {
-        name: "Motilal Oswal Midcap Fund (Direct-Growth)",
-        expenseRatio: "0.68% TER",
-        volatility: "High Growth Potential",
-        rationale: "High ROCE Indian mid-market leaders with expanding operating leverage.",
-      },
-    ],
-  },
-  {
-    id: "liquid",
-    name: "Liquid & Arbitrage Parking",
-    badge: "Emergency Buffer (10-15%)",
-    minTicket: "₹500 Lumpsum",
-    recommendedFor: "Tax-efficient short-term yield without equity drawdown risk",
-    riskProfile: "Lowest Volatility",
-    instruments: [
-      {
-        name: "Tata Arbitrage Fund (Direct-Growth)",
-        expenseRatio: "0.34% TER",
-        volatility: "Near-Zero Drawdown",
-        rationale: "Equity taxation benefits with debt-like stability via cash-futures arbitrage.",
-      },
-      {
-        name: "ICICI Prudential Liquid Fund (Direct-Growth)",
-        expenseRatio: "0.20% TER",
-        volatility: "T+1 Instant Liquidity",
-        rationale: "Parks emergency reserves with instantaneous bank sweep-in capability.",
-      },
-    ],
-  },
-];
+  // Difference between 5.28% Treasury Yield and 0.05% Checking APY
+  const annualGain = Math.round(sliderVal * (0.0528 - 0.0005));
+  const monthlyGain = Math.round(annualGain / 12);
 
-export function ActSection() {
-  const [activeCategory, setActiveCategory] = useState<string>("index");
-  const [selectedTicket, setSelectedTicket] = useState<number>(500);
-
-  const currentCategory = CATEGORIES.find((c) => c.id === activeCategory) || CATEGORIES[0];
+  const handleAuthorize = () => {
+    setStatus("authorizing");
+    setTimeout(() => {
+      setStatus("authorized");
+      setShowReceipt(true);
+    }, 1100);
+  };
 
   return (
-    <section id="act" className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
-            <Zap className="w-3.5 h-3.5 text-emerald-600" />
-            <span>02 / ACT & INVEST DIRECTLY</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
-            Execute with precision. Zero middleman drag.
-          </h2>
-          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
-            Move from passive intent to automated systematic execution. Build institutional-grade portfolios
-            anchored in low-cost direct plans, index tracking, and disciplined asset-allocation rules.
-          </p>
+    <section id="act" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+      {/* Editorial Header */}
+      <div className="max-w-3xl mb-14">
+        <div className="font-mono text-xs text-[#006C49] font-semibold uppercase tracking-wider mb-3">
+          03 / 04 — DECISION LEVERAGE
         </div>
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-primary font-normal leading-[1.12] mb-4">
+          Know what to do next. From observation to high-conviction action.
+        </h2>
+        <p className="font-sans text-sm sm:text-base text-[#4B5563] leading-relaxed">
+          Most dashboards simply tell you that you are losing to inflation. Fermor translates balance sheet discrepancies into executable transactions with guaranteed counterparty transparency.
+        </p>
+      </div>
 
-        {/* Interactive Asset Matrix */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Category Tabs (4 cols) */}
-          <div className="lg:col-span-4 space-y-3.5">
-            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354] mb-2">
-              Strategic Asset Tranches:
+      {/* The Fermor Action Engine Simulator Card */}
+      <div className="bg-white rounded-xl border border-black/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 sm:p-10 relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Action Context Column */}
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#FFFBEB] text-[#78350F] font-mono text-[11px] font-semibold border border-[#D97706]/20 mb-4">
+              <Zap className="w-3.5 h-3.5 text-[#D97706]" />
+              <span>TACTICAL LEVERAGE POINT DETECTED</span>
             </div>
-            {CATEGORIES.map((cat) => {
-              const isActive = cat.id === activeCategory;
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all ${
-                    isActive
-                      ? "bg-white text-[#10251B] border-emerald-500 shadow-md ring-1 ring-emerald-500/20"
-                      : "bg-[#F7FAF8] text-[#4B6354] border-[#DDE8E1] hover:border-emerald-300 hover:bg-white"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span
-                      className={`text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full ${
-                        isActive
-                          ? "bg-emerald-600 text-white"
-                          : "bg-white text-emerald-800 border border-[#DDE8E1]"
-                      }`}
-                    >
-                      {cat.badge}
-                    </span>
-                    <span className="text-xs font-mono text-[#82998B]">
-                      {cat.minTicket}
-                    </span>
-                  </div>
-                  <div className="text-base font-semibold text-[#10251B] mt-2.5">{cat.name}</div>
-                  <p className="text-xs mt-1.5 leading-relaxed text-[#4B6354]">
-                    {cat.recommendedFor}
-                  </p>
-                </button>
-              );
-            })}
 
-            {/* Quick Micro Callout */}
-            <div className="p-4 bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] text-xs space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#10251B]">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Zero Commission Guarantee</span>
+            <h3 className="font-serif text-2xl sm:text-3xl text-primary font-normal mb-4">
+              Fermor noticed an asymmetry in your cash reserves.
+            </h3>
+
+            <p className="font-sans text-sm sm:text-base text-[#4B5563] mb-8 leading-relaxed">
+              Your monthly savings cadence has expanded for four consecutive cycles. You are currently leaving <span className="font-semibold text-[#111827]">$142,000 in commercial checking</span> earning 0.05% APY, while institutional 3-Month T-Bills yield 5.28%.
+            </p>
+
+            {/* Interactive Simulation Slider */}
+            <div className="p-6 bg-[#FBFBFA] rounded-lg border border-black/[0.06] mb-8">
+              <div className="flex justify-between items-center mb-3">
+                <span className="font-mono text-xs uppercase text-[#111827] font-semibold">
+                  Simulate Capital Sweep
+                </span>
+                <span className="font-mono text-2xl sm:text-3xl font-semibold text-primary tabular-nums">
+                  ${sliderVal.toLocaleString()}
+                </span>
               </div>
-              <p className="text-[#4B6354] leading-relaxed">
-                Fermor charges 0 transaction markups and directs you strictly to AMC Direct Plans.
-                You retain 100% of your compounding return.
-              </p>
+
+              <input
+                type="range"
+                min="10000"
+                max="130000"
+                step="5000"
+                value={sliderVal}
+                onChange={(e) => setSliderVal(parseInt(e.target.value, 10))}
+                className="w-full h-2.5 bg-[#E5E5DF] rounded-lg appearance-none cursor-pointer accent-[#006C49]"
+              />
+
+              <div className="flex justify-between text-[11px] text-[#4B5563] font-mono mt-3">
+                <span>$10,000 (Conservative)</span>
+                <span className="font-semibold text-[#006C49]">
+                  $85,000 (Recommended Target)
+                </span>
+                <span>$130,000 (Max Deploy)</span>
+              </div>
+            </div>
+
+            {/* Authorize Control */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <button
+                onClick={handleAuthorize}
+                disabled={status === "authorizing"}
+                className={`inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-7 py-3.5 rounded shadow-sm transition-all duration-200 active:scale-[0.98] ${
+                  status === "authorized"
+                    ? "bg-[#10B981] text-white"
+                    : status === "authorizing"
+                    ? "bg-primary text-white opacity-80 cursor-wait"
+                    : "bg-primary-container text-white hover:bg-primary"
+                }`}
+              >
+                {status === "authorizing" ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Authorizing Simulated Sweep...</span>
+                  </>
+                ) : status === "authorized" ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Sweep Order Queued</span>
+                  </>
+                ) : (
+                  <>
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Authorize Simulated Sweep</span>
+                  </>
+                )}
+              </button>
+
+              {status === "authorized" && (
+                <button
+                  onClick={() => setShowReceipt(true)}
+                  className="inline-flex items-center gap-1.5 text-xs text-[#006C49] font-mono font-medium hover:underline"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>View Execution Ticket</span>
+                </button>
+              )}
+
+              <span className="text-xs text-[#4B5563] font-mono sm:ml-auto">
+                Zero lockup penalty • T+0 settlement clear
+              </span>
             </div>
           </div>
 
-          {/* Asset Deep-Dive Inspector (8 cols) */}
-          <div className="lg:col-span-8 bg-[#F7FAF8] p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] shadow-xs space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#DDE8E1]">
+          {/* Calculated Impact Metrics Rail */}
+          <div className="lg:col-span-5 bg-[#F4F4F1] rounded-xl border border-black/[0.06] p-6 sm:p-8 flex flex-col justify-between">
+            <span className="font-mono text-xs uppercase text-[#4B5563] block mb-5 font-semibold">
+              Calculated Action Impact
+            </span>
+
+            <div className="space-y-6">
               <div>
-                <span className="text-xs font-mono text-[#4B6354] uppercase">Selected Vehicle</span>
-                <h3 className="text-xl font-bold text-[#10251B] mt-0.5">
-                  {currentCategory.name}
-                </h3>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xs text-[#4B6354] font-medium font-mono">Test SIP Outgo:</span>
-                <div className="inline-flex rounded-xl bg-white border border-[#DDE8E1] p-1 text-xs font-mono font-semibold">
-                  {[500, 2500, 10000].map((amt) => (
-                    <button
-                      key={amt}
-                      type="button"
-                      onClick={() => setSelectedTicket(amt)}
-                      className={`px-3 py-1 rounded-lg transition-all ${
-                        selectedTicket === amt
-                          ? "bg-emerald-600 text-white shadow-xs"
-                          : "text-[#4B6354] hover:text-[#10251B]"
-                      }`}
-                    >
-                      ₹{amt.toLocaleString("en-IN")}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Benchmark Quality Direct Plans */}
-            <div className="space-y-4">
-              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354]">
-                Direct Plan Benchmark Quality Instruments
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {currentCategory.instruments.map((inst) => (
-                  <div
-                    key={inst.name}
-                    className="p-5 bg-white rounded-xl border border-[#DDE8E1] space-y-3 hover:border-emerald-400 transition-colors shadow-2xs"
-                  >
-                    <div className="flex justify-between items-start">
-                      <span className="font-semibold text-sm text-[#10251B] leading-snug">
-                        {inst.name}
-                      </span>
-                      <span className="shrink-0 ml-2 text-xs font-mono px-2 py-0.5 bg-[#F2F7F4] text-emerald-800 border border-emerald-500/20 rounded font-semibold">
-                        {inst.expenseRatio}
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-[#4B6354] leading-relaxed">{inst.rationale}</p>
-
-                    <div className="pt-2 border-t border-[#DDE8E1] flex items-center justify-between text-[11px] text-[#4B6354] font-mono">
-                      <span>{inst.volatility}</span>
-                      <span className="text-emerald-700 font-semibold flex items-center gap-1">
-                        <Check className="w-3 h-3 text-emerald-600" />
-                        SEBI Regulated
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Simulated 10-Year Outcome with Selected Ticket */}
-            <div className="p-5 bg-white rounded-xl border border-[#DDE8E1] flex flex-wrap items-center justify-between gap-4 text-xs shadow-2xs">
-              <div>
-                <span className="text-[#4B6354]">
-                  If you run an automated SIP of ₹{selectedTicket.toLocaleString("en-IN")}/mo today:
+                <span className="font-mono text-[11px] uppercase text-[#4B5563] block mb-1">
+                  Additional Annual Risk-Free Yield
                 </span>
-                <div className="text-sm font-semibold text-[#10251B] mt-1">
-                  Projected 10Y Corpus: ~₹
-                  {Math.round(
-                    (selectedTicket * (Math.pow(1 + 0.12 / 12, 120) - 1) * (1 + 0.12 / 12)) /
-                      (0.12 / 12)
-                  ).toLocaleString("en-IN")}{" "}
-                  <span className="text-[#82998B] font-mono">(assumed 12% CAGR)</span>
+                <div className="font-mono text-3xl sm:text-4xl text-[#006C49] font-bold tabular-nums">
+                  +${annualGain.toLocaleString()}.00 / yr
+                </div>
+                <div className="text-xs text-[#4B5563] mt-1 font-mono">
+                  +${monthlyGain.toLocaleString()} monthly cashflow at 5.28% repo
                 </div>
               </div>
 
-              <a
-                href="#calculators"
-                className="inline-flex items-center gap-1.5 font-semibold text-xs px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors shadow-xs"
-              >
-                <span>Customize in SIP Lab</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              <div className="pt-4 border-t border-black/[0.06]">
+                <span className="font-mono text-[11px] uppercase text-[#4B5563] block mb-1">
+                  Liquidity Penalty
+                </span>
+                <div className="font-mono text-lg text-[#111827] font-semibold">
+                  0 Business Days
+                </div>
+                <div className="text-xs text-[#4B5563] mt-0.5 font-mono">
+                  Instant auto-drawback to checking if balance hits floor
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-black/[0.06]">
+                <span className="font-mono text-[11px] uppercase text-[#4B5563] block mb-1">
+                  Tax Drag Mitigation
+                </span>
+                <div className="font-mono text-lg text-[#111827] font-semibold">
+                  State Tax-Exempt (100%)
+                </div>
+                <div className="text-xs text-[#4B5563] mt-0.5 font-mono">
+                  Federal Treasury exemption qualifies under US Code § 3124
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs text-[#111827] font-semibold">
+              <span>Risk Profile Assessment</span>
+              <span className="text-[#006C49] font-mono">AAA US Sovereign Rated</span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Simulated Execution Ticket Modal */}
+      {showReceipt && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl border border-black/10 shadow-2xl max-w-md w-full p-6 animate-fadeIn">
+            <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+                <span className="font-mono text-xs uppercase font-semibold text-primary">
+                  Simulated Execution Ticket
+                </span>
+              </div>
+              <button
+                onClick={() => setShowReceipt(false)}
+                className="p-1 text-[#9CA3AF] hover:text-[#111827] rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3 font-mono text-xs">
+              <div className="flex justify-between py-1 border-b border-black/[0.04]">
+                <span className="text-[#4B5563]">TRANSACTION ID</span>
+                <span className="font-semibold text-[#111827]">#FRM-SWEEP-9821</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-black/[0.04]">
+                <span className="text-[#4B5563]">ALLOCATED CAPITAL</span>
+                <span className="font-bold text-primary">${sliderVal.toLocaleString()}.00</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-black/[0.04]">
+                <span className="text-[#4B5563]">TARGET VESSEL</span>
+                <span className="text-[#111827]">US Treasury Repo (4-Wk)</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-black/[0.04]">
+                <span className="text-[#4B5563]">INSTITUTIONAL YIELD</span>
+                <span className="text-[#006C49] font-bold">5.28% APY</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-black/[0.04]">
+                <span className="text-[#4B5563]">CHECKING FLOOR SHIELD</span>
+                <span className="text-[#111827]">$35,000 (Guaranteed)</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span className="text-[#4B5563]">SETTLEMENT HORIZON</span>
+                <span className="text-[#006C49]">T+0 (Immediate)</span>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-black/[0.06]">
+              <button
+                onClick={() => setShowReceipt(false)}
+                className="w-full py-2.5 bg-primary-container text-white font-sans text-xs font-semibold rounded hover:bg-primary transition-all"
+              >
+                Dismiss Ticket
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

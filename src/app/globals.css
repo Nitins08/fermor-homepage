@@ -1,194 +1,53 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --background-surface: #F7FAF8;
-    --background-panel: #F2F7F4;
-    --background-card: #FFFFFF;
-    --border-hairline: #DDE8E1;
-    --border-subtle: #C5D8CD;
-    --border-accent: rgba(16, 185, 129, 0.35);
-
-    --foreground: #10251B;
-    --foreground-muted: #4B6354;
-    --foreground-dim: #708A7C;
-
-    --green-deep: #0B3D2E;
-    --green-primary: #16A34A;
-    --emerald-accent: #10B981;
-    --mint-soft: #34D399;
-    --green-light: #DCFCE7;
-    --rose-negative: #EF4444;
-  }
-
-  * {
-    border-color: var(--border-hairline);
+    --font-newsreader: 'Newsreader', Georgia, serif;
+    --font-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-jetbrains: 'JetBrains Mono', monospace;
   }
 
   html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    background-color: #FFFFFF;
-    color: #10251B;
   }
 
   body {
-    background-color: #FFFFFF;
-    color: #10251B;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    overflow-x: hidden;
+    background-color: #FBFBFA;
+    color: #111827;
+    font-family: var(--font-jakarta);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Accessible focus rings */
-  :focus-visible {
-    outline: 2px solid #10B981;
-    outline-offset: 2px;
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
   }
-
-  /* Luxury range slider */
-  input[type="range"] {
-    accent-color: #10B981;
+  ::-webkit-scrollbar-track {
+    background: #F4F4F1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
   }
 }
 
-/* Custom utility for financial numbers */
-.num-tabular {
+/* Tabular figures for numbers */
+.tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Luxury 3D Perspective and Virtual Camera Stage */
-.virtual-camera-stage {
-  perspective: 1200px;
-  perspective-origin: 50% 50%;
-  transform-style: preserve-3d;
+/* Subtle hairline borders */
+.hairline-border {
+  border: 1px solid rgba(17, 24, 39, 0.08);
 }
 
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.translate-z-10 {
-  transform: translateZ(10px);
-}
-
-.translate-z-20 {
-  transform: translateZ(20px);
-}
-
-.translate-z-30 {
-  transform: translateZ(30px);
-}
-
-.translate-z-50 {
-  transform: translateZ(50px);
-}
-
-/* Subtle luxury light financial terminal grid */
-.bg-light-grid {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(16, 37, 27, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 37, 27, 0.04) 1px, transparent 1px);
-}
-
-.bg-mint-radial {
-  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.07) 0%, rgba(247, 250, 248, 0.6) 50%, #FFFFFF 100%);
-}
-
-/* White architectural surface with soft realistic physical depth */
-.white-architectural-surface {
-  background: #FFFFFF;
-  border: 1px solid #DDE8E1;
-  box-shadow: 
-    0 20px 45px -15px rgba(16, 37, 27, 0.08),
-    0 1px 3px 0 rgba(16, 37, 27, 0.04),
-    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-}
-
-.white-architectural-interactive {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.white-architectural-interactive:hover {
-  border-color: #10B981;
-  box-shadow: 
-    0 25px 50px -15px rgba(16, 37, 27, 0.12),
-    0 0 25px -5px rgba(16, 185, 129, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 1) inset;
-}
-
-/* Subtle orbital rotation */
-@keyframes orbitSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-orbit-slow {
-  animation: orbitSlow 28s linear infinite;
-}
-
-.animate-orbit-reverse {
-  animation: orbitSlow 36s linear infinite reverse;
-}
-
-/* Brand Reveal Animation Keyframes */
-@keyframes markStroke {
-  0% {
-    stroke-dashoffset: 200;
-    opacity: 0.2;
-  }
-  50% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-}
-
-@keyframes logoShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-mark-stroke {
-  stroke-dasharray: 200;
-  animation: markStroke 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.logo-shimmer {
-  background: linear-gradient(
-    90deg,
-    #10251B 0%,
-    #10251B 40%,
-    #10B981 50%,
-    #10251B 60%,
-    #10251B 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: logoShimmer 2.4s ease-in-out 1;
-}
-
-/* Smooth motion control */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.hairline-border-dark {
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
