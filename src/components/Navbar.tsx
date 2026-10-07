@@ -12,9 +12,14 @@ import {
   ShieldCheck,
   Zap,
   Activity,
+  Sliders,
 } from "lucide-react";
 
-export function Navbar() {
+interface NavbarProps {
+  onOpenTools?: (tab?: any) => void;
+}
+
+export function Navbar({ onOpenTools }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoRevealed, setLogoRevealed] = useState(false);
@@ -36,12 +41,11 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Overview", href: "#overview", icon: PieChart },
-    { label: "Understand", href: "#understand", icon: PieChart },
-    { label: "Act & Invest", href: "#act", icon: Zap },
-    { label: "Grow & Forecast", href: "#grow", icon: Compass },
-    { label: "Calculators", href: "#calculators", icon: Calculator },
-    { label: "Intelligence", href: "#intelligence", icon: ShieldCheck },
+    { label: "01 Core", href: "#", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
+    { label: "02 Flow", href: "#", action: () => window.scrollTo({ top: window.innerHeight * 1.5, behavior: "smooth" }) },
+    { label: "03 Decide", href: "#", action: () => window.scrollTo({ top: window.innerHeight * 2.8, behavior: "smooth" }) },
+    { label: "04 Curve", href: "#", action: () => window.scrollTo({ top: window.innerHeight * 4.0, behavior: "smooth" }) },
+    { label: "05 Terminal", href: "#", action: () => window.scrollTo({ top: window.innerHeight * 5.2, behavior: "smooth" }) },
   ];
 
   return (
@@ -57,6 +61,7 @@ export function Navbar() {
           {/* Logo with Brand Reveal Animation */}
           <Link
             href="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
             aria-label="Fermor Homepage"
           >
@@ -100,54 +105,58 @@ export function Navbar() {
                   Fermor
                 </span>
                 <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 bg-[#0D2747] text-blue-300 border border-[#123A63] rounded tracking-wider font-medium">
-                  Operating System
+                  Scrolltelling 2.0
                 </span>
               </div>
               <span className="text-[10px] text-slate-400 font-mono tracking-widest uppercase">
-                India Private Wealth
+                Private Wealth Architecture
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2 font-mono" aria-label="Main Navigation">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
-                className="px-3.5 py-2 text-xs lg:text-sm font-medium text-slate-300 hover:text-white hover:bg-[#0A1D35]/60 rounded-md transition-all duration-200 border border-transparent hover:border-[#123A63]/50"
+                type="button"
+                onClick={link.action}
+                className="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-cyan-300 hover:bg-[#0A1D35]/60 rounded-md transition-all duration-200 border border-transparent hover:border-[#123A63]/50"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
 
           {/* Right Action Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="#health-check"
+            <button
+              type="button"
+              onClick={() => onOpenTools ? onOpenTools("health") : undefined}
               className="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-2 text-blue-300 bg-[#0A1D35]/80 hover:bg-[#0D2747] border border-[#123A63] hover:border-blue-500/40 rounded-lg transition-all shadow-xs"
             >
               <Activity className="w-3.5 h-3.5 text-cyan-400" />
               <span>Health Audit</span>
-            </a>
-            <a
-              href="#calculators"
+            </button>
+            <button
+              type="button"
+              onClick={() => onOpenTools ? onOpenTools("calculators") : undefined}
               className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-lg shadow-md shadow-blue-900/30 border border-blue-400/30 transition-all group"
             >
-              <span>Launch Terminal</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </a>
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Tools Suite</span>
+            </button>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center gap-2">
-            <a
-              href="#health-check"
+            <button
+              type="button"
+              onClick={() => onOpenTools ? onOpenTools("calculators") : undefined}
               className="text-[11px] font-semibold px-2.5 py-1.5 text-blue-300 bg-[#0A1D35] border border-[#123A63] rounded-md"
             >
-              Audit
-            </a>
+              Tools
+            </button>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -165,37 +174,42 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-[#0D2747] bg-[#050B18]/98 backdrop-blur-xl px-4 pt-3 pb-6 shadow-2xl animate-in slide-in-from-top-2 duration-150">
           <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-[#0A1D35] rounded-md border border-transparent hover:border-[#123A63]"
-                >
-                  <Icon className="w-4 h-4 text-blue-400" />
-                  {link.label}
-                </a>
-              );
-            })}
+            {navLinks.map((link) => (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => {
+                  link.action();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full text-left px-3 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-[#0A1D35] rounded-md"
+              >
+                {link.label}
+              </button>
+            ))}
           </div>
           <div className="mt-4 pt-4 border-t border-[#0D2747] flex flex-col gap-2.5">
-            <a
-              href="#health-check"
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenTools) onOpenTools("health");
+                setMobileMenuOpen(false);
+              }}
               className="w-full text-center text-xs font-semibold py-2.5 text-blue-300 bg-[#0A1D35] border border-[#123A63] rounded-md"
             >
               Instant Financial Health Audit
-            </a>
-            <a
-              href="#calculators"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenTools) onOpenTools("calculators");
+                setMobileMenuOpen(false);
+              }}
               className="w-full text-center text-xs font-semibold py-2.5 text-white bg-blue-600 rounded-md flex items-center justify-center gap-2"
             >
               <span>Explore In-Browser Calculators</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </div>
         </div>
       )}
