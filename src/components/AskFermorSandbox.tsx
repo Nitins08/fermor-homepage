@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { MessageSquareText, Sparkles, Check, ArrowRight } from "lucide-react";
+import { MessageSquareText, Sparkles, Check } from "lucide-react";
 
 interface QueryScenario {
   id: string;
@@ -102,18 +102,18 @@ export function AskFermorSandbox() {
   const current = SCENARIOS.find((s) => s.id === activeScenario) || SCENARIOS[0];
 
   return (
-    <section id="intelligence" className="py-24 bg-[#050B18] border-b border-[#0D2747]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="intelligence" className="py-12 bg-white">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
-            <MessageSquareText className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="max-w-3xl mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
+            <MessageSquareText className="w-3.5 h-3.5 text-emerald-600" />
             <span>05 / NATURAL SCENARIO INTELLIGENCE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
             Ask complex trade-offs. Get mathematical clarity.
           </h2>
-          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
+          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
             Financial decisions are never one-dimensional. Explore realistic scenarios tested against
             Indian tax legislation, market volatility benchmarks, and cash flow constraints.
           </p>
@@ -123,7 +123,7 @@ export function AskFermorSandbox() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Query Selection Prompts (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
-            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-2">
+            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354] mb-2">
               Select Real-World Financial Query:
             </div>
             {SCENARIOS.map((scenario) => {
@@ -135,20 +135,20 @@ export function AskFermorSandbox() {
                   onClick={() => setActiveScenario(scenario.id)}
                   className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all ${
                     isSelected
-                      ? "bg-[#0A1D35] text-white border-blue-400 shadow-xl shadow-blue-950/40"
-                      : "bg-[#071426] text-slate-300 border-[#123A63] hover:border-slate-400 hover:bg-[#0A1D35]/50"
+                      ? "bg-white text-[#10251B] border-emerald-500 shadow-md ring-1 ring-emerald-500/20"
+                      : "bg-[#F7FAF8] text-[#4B6354] border-[#DDE8E1] hover:border-emerald-300 hover:bg-white"
                   }`}
                 >
                   <span
                     className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full ${
                       isSelected
-                        ? "bg-blue-600 text-white"
-                        : "bg-[#050B18] text-cyan-300 border border-[#123A63]"
+                        ? "bg-emerald-600 text-white"
+                        : "bg-white text-emerald-800 border border-[#DDE8E1]"
                     }`}
                   >
                     {scenario.tag}
                   </span>
-                  <div className="text-sm font-semibold text-white mt-2 leading-snug">
+                  <div className="text-sm font-semibold text-[#10251B] mt-2 leading-snug">
                     {scenario.question}
                   </div>
                 </button>
@@ -157,14 +157,14 @@ export function AskFermorSandbox() {
           </div>
 
           {/* Detailed Intelligence Breakdown (8 cols) */}
-          <div className="lg:col-span-8 bg-[#071426] p-6 sm:p-8 rounded-2xl border border-[#123A63] shadow-xl space-y-6">
+          <div className="lg:col-span-8 bg-[#F7FAF8] p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] shadow-xs space-y-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-cyan-400 mb-2">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-700 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Deterministic Calculation Model</span>
               </div>
-              <h3 className="text-xl font-bold text-white leading-snug">{current.question}</h3>
-              <p className="mt-2 text-sm text-slate-300 leading-relaxed font-light">
+              <h3 className="text-xl font-bold text-[#10251B] leading-snug">{current.question}</h3>
+              <p className="mt-2 text-sm text-[#4B6354] leading-relaxed">
                 {current.answerSummary}
               </p>
             </div>
@@ -174,29 +174,29 @@ export function AskFermorSandbox() {
               {current.mathBreakdown.map((item) => (
                 <div
                   key={item.label}
-                  className="p-4 bg-[#0A1D35]/70 rounded-xl border border-[#123A63] space-y-2 hover:border-blue-500/40 transition-colors"
+                  className="p-4 bg-white rounded-xl border border-[#DDE8E1] space-y-2 hover:border-emerald-400 transition-colors shadow-2xs"
                 >
-                  <div className="text-[11px] font-mono font-medium text-slate-400 uppercase">
+                  <div className="text-[11px] font-mono font-medium text-[#4B6354] uppercase">
                     {item.label}
                   </div>
-                  <div className="text-base font-bold text-white num-tabular font-mono">
+                  <div className="text-base font-bold text-[#10251B] num-tabular font-mono">
                     {item.value}
                   </div>
-                  <div className="text-[11px] text-slate-400 leading-snug font-light">{item.note}</div>
+                  <div className="text-[11px] text-[#4B6354] leading-snug">{item.note}</div>
                 </div>
               ))}
             </div>
 
             {/* Verdict Box */}
-            <div className="p-5 bg-[#050B18] rounded-xl border border-blue-500/40 flex items-start gap-3.5">
-              <div className="p-1.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 shrink-0 mt-0.5">
+            <div className="p-5 bg-white rounded-xl border border-emerald-500/30 flex items-start gap-3.5 shadow-2xs">
+              <div className="p-1.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 shrink-0 mt-0.5">
                 <Check className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300">
+                <div className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-800">
                   Data-Grounded Synthesis
                 </div>
-                <div className="text-sm font-medium text-slate-200 mt-1 leading-relaxed">
+                <div className="text-sm font-medium text-[#10251B] mt-1 leading-relaxed">
                   {current.verdict}
                 </div>
               </div>

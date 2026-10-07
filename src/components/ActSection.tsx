@@ -94,18 +94,18 @@ export function ActSection() {
   const currentCategory = CATEGORIES.find((c) => c.id === activeCategory) || CATEGORIES[0];
 
   return (
-    <section id="act" className="py-24 bg-[#050B18] border-b border-[#0D2747]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="act" className="py-12 bg-white">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="max-w-3xl mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
+            <Zap className="w-3.5 h-3.5 text-emerald-600" />
             <span>02 / ACT & INVEST DIRECTLY</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
             Execute with precision. Zero middleman drag.
           </h2>
-          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
+          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
             Move from passive intent to automated systematic execution. Build institutional-grade portfolios
             anchored in low-cost direct plans, index tracking, and disciplined asset-allocation rules.
           </p>
@@ -115,7 +115,7 @@ export function ActSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Category Tabs (4 cols) */}
           <div className="lg:col-span-4 space-y-3.5">
-            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-2">
+            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354] mb-2">
               Strategic Asset Tranches:
             </div>
             {CATEGORIES.map((cat) => {
@@ -127,26 +127,26 @@ export function ActSection() {
                   onClick={() => setActiveCategory(cat.id)}
                   className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all ${
                     isActive
-                      ? "bg-[#0A1D35] text-white border-blue-400 shadow-xl shadow-blue-950/40"
-                      : "bg-[#071426] text-slate-300 border-[#123A63] hover:border-slate-400 hover:bg-[#0A1D35]/50"
+                      ? "bg-white text-[#10251B] border-emerald-500 shadow-md ring-1 ring-emerald-500/20"
+                      : "bg-[#F7FAF8] text-[#4B6354] border-[#DDE8E1] hover:border-emerald-300 hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "bg-[#050B18] text-cyan-300 border border-[#123A63]"
+                          ? "bg-emerald-600 text-white"
+                          : "bg-white text-emerald-800 border border-[#DDE8E1]"
                       }`}
                     >
                       {cat.badge}
                     </span>
-                    <span className="text-xs font-mono text-slate-400">
+                    <span className="text-xs font-mono text-[#82998B]">
                       {cat.minTicket}
                     </span>
                   </div>
-                  <div className="text-base font-semibold text-white mt-2.5">{cat.name}</div>
-                  <p className="text-xs mt-1.5 leading-relaxed text-slate-400 font-light">
+                  <div className="text-base font-semibold text-[#10251B] mt-2.5">{cat.name}</div>
+                  <p className="text-xs mt-1.5 leading-relaxed text-[#4B6354]">
                     {cat.recommendedFor}
                   </p>
                 </button>
@@ -154,12 +154,12 @@ export function ActSection() {
             })}
 
             {/* Quick Micro Callout */}
-            <div className="p-4 bg-[#071426] rounded-2xl border border-[#123A63] text-xs space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-white">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <div className="p-4 bg-[#F7FAF8] rounded-2xl border border-[#DDE8E1] text-xs space-y-2">
+              <div className="flex items-center gap-2 font-semibold text-[#10251B]">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>Zero Commission Guarantee</span>
               </div>
-              <p className="text-slate-300 font-light leading-relaxed">
+              <p className="text-[#4B6354] leading-relaxed">
                 Fermor charges 0 transaction markups and directs you strictly to AMC Direct Plans.
                 You retain 100% of your compounding return.
               </p>
@@ -167,17 +167,17 @@ export function ActSection() {
           </div>
 
           {/* Asset Deep-Dive Inspector (8 cols) */}
-          <div className="lg:col-span-8 bg-[#071426] p-6 sm:p-8 rounded-2xl border border-[#123A63] shadow-xl space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#0D2747]">
+          <div className="lg:col-span-8 bg-[#F7FAF8] p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] shadow-xs space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#DDE8E1]">
               <div>
-                <span className="text-xs font-mono text-slate-400 uppercase">Selected Vehicle</span>
-                <h3 className="text-xl font-bold text-white mt-0.5">
+                <span className="text-xs font-mono text-[#4B6354] uppercase">Selected Vehicle</span>
+                <h3 className="text-xl font-bold text-[#10251B] mt-0.5">
                   {currentCategory.name}
                 </h3>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="text-xs text-slate-400 font-medium font-mono">Test SIP Outgo:</span>
-                <div className="inline-flex rounded-xl bg-[#050B18] border border-[#123A63] p-1 text-xs font-mono font-semibold">
+                <span className="text-xs text-[#4B6354] font-medium font-mono">Test SIP Outgo:</span>
+                <div className="inline-flex rounded-xl bg-white border border-[#DDE8E1] p-1 text-xs font-mono font-semibold">
                   {[500, 2500, 10000].map((amt) => (
                     <button
                       key={amt}
@@ -185,8 +185,8 @@ export function ActSection() {
                       onClick={() => setSelectedTicket(amt)}
                       className={`px-3 py-1 rounded-lg transition-all ${
                         selectedTicket === amt
-                          ? "bg-blue-600 text-white shadow-xs"
-                          : "text-slate-400 hover:text-white"
+                          ? "bg-emerald-600 text-white shadow-xs"
+                          : "text-[#4B6354] hover:text-[#10251B]"
                       }`}
                     >
                       ₹{amt.toLocaleString("en-IN")}
@@ -198,30 +198,30 @@ export function ActSection() {
 
             {/* Benchmark Quality Direct Plans */}
             <div className="space-y-4">
-              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#4B6354]">
                 Direct Plan Benchmark Quality Instruments
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentCategory.instruments.map((inst) => (
                   <div
                     key={inst.name}
-                    className="p-5 bg-[#0A1D35]/70 rounded-xl border border-[#123A63] space-y-3 hover:border-blue-500/40 transition-colors"
+                    className="p-5 bg-white rounded-xl border border-[#DDE8E1] space-y-3 hover:border-emerald-400 transition-colors shadow-2xs"
                   >
                     <div className="flex justify-between items-start">
-                      <span className="font-semibold text-sm text-white leading-snug">
+                      <span className="font-semibold text-sm text-[#10251B] leading-snug">
                         {inst.name}
                       </span>
-                      <span className="shrink-0 ml-2 text-xs font-mono px-2 py-0.5 bg-[#050B18] text-cyan-400 border border-[#123A63] rounded font-semibold">
+                      <span className="shrink-0 ml-2 text-xs font-mono px-2 py-0.5 bg-[#F2F7F4] text-emerald-800 border border-emerald-500/20 rounded font-semibold">
                         {inst.expenseRatio}
                       </span>
                     </div>
 
-                    <p className="text-xs text-slate-300 leading-relaxed font-light">{inst.rationale}</p>
+                    <p className="text-xs text-[#4B6354] leading-relaxed">{inst.rationale}</p>
 
-                    <div className="pt-2 border-t border-[#0D2747] flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                    <div className="pt-2 border-t border-[#DDE8E1] flex items-center justify-between text-[11px] text-[#4B6354] font-mono">
                       <span>{inst.volatility}</span>
-                      <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                        <Check className="w-3 h-3" />
+                      <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                        <Check className="w-3 h-3 text-emerald-600" />
                         SEBI Regulated
                       </span>
                     </div>
@@ -231,24 +231,24 @@ export function ActSection() {
             </div>
 
             {/* Simulated 10-Year Outcome with Selected Ticket */}
-            <div className="p-5 bg-[#050B18] rounded-xl border border-[#0D2747] flex flex-wrap items-center justify-between gap-4 text-xs">
+            <div className="p-5 bg-white rounded-xl border border-[#DDE8E1] flex flex-wrap items-center justify-between gap-4 text-xs shadow-2xs">
               <div>
-                <span className="text-slate-400 font-light">
+                <span className="text-[#4B6354]">
                   If you run an automated SIP of ₹{selectedTicket.toLocaleString("en-IN")}/mo today:
                 </span>
-                <div className="text-sm font-semibold text-white mt-1">
+                <div className="text-sm font-semibold text-[#10251B] mt-1">
                   Projected 10Y Corpus: ~₹
                   {Math.round(
                     (selectedTicket * (Math.pow(1 + 0.12 / 12, 120) - 1) * (1 + 0.12 / 12)) /
                       (0.12 / 12)
                   ).toLocaleString("en-IN")}{" "}
-                  <span className="text-slate-400 font-normal font-mono">(assumed 12% CAGR)</span>
+                  <span className="text-[#82998B] font-mono">(assumed 12% CAGR)</span>
                 </div>
               </div>
 
               <a
                 href="#calculators"
-                className="inline-flex items-center gap-1.5 font-semibold text-xs px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors shadow-md shadow-blue-900/30"
+                className="inline-flex items-center gap-1.5 font-semibold text-xs px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors shadow-xs"
               >
                 <span>Customize in SIP Lab</span>
                 <ArrowRight className="w-3.5 h-3.5" />

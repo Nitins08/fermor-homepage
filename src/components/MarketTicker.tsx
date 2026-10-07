@@ -6,20 +6,20 @@ import { TrendingUp, TrendingDown, Clock, Shield } from "lucide-react";
 
 export function MarketTicker() {
   return (
-    <div className="w-full bg-[#050B18] text-slate-300 border-b border-[#0D2747] text-xs py-2 px-4 select-none overflow-hidden">
+    <div className="w-full bg-[#F7FAF8] text-[#10251B] border-b border-[#DDE8E1] text-xs py-2 px-4 select-none overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Market Status Indicator */}
-        <div className="flex items-center gap-2.5 text-slate-400 font-medium shrink-0">
+        <div className="flex items-center gap-2.5 text-[#4B6354] font-medium shrink-0">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
           </span>
-          <span className="tracking-wider text-[11px] uppercase font-mono font-semibold text-slate-200">
+          <span className="tracking-wider text-[11px] uppercase font-mono font-semibold text-[#0B3D2E]">
             National Stock Exchange • BSE
           </span>
-          <span className="text-[#123A63] font-bold">•</span>
-          <span className="hidden sm:flex items-center gap-1 text-[11px] text-slate-400 font-mono">
-            <Clock className="w-3 h-3 text-blue-400" />
+          <span className="text-slate-300 font-bold">•</span>
+          <span className="hidden sm:flex items-center gap-1 text-[11px] text-[#4B6354] font-mono">
+            <Clock className="w-3 h-3 text-emerald-600" />
             IST 09:15 - 15:30 Synced
           </span>
         </div>
@@ -28,11 +28,11 @@ export function MarketTicker() {
         <div className="flex items-center gap-5 sm:gap-7 overflow-x-auto no-scrollbar py-0.5 font-mono text-[11px]">
           {MARKET_TICKER_DATA.map((item) => (
             <div key={item.symbol} className="flex items-center gap-2 shrink-0">
-              <span className="text-slate-400 font-medium">{item.symbol}</span>
-              <span className="text-white font-semibold num-tabular">{item.price}</span>
+              <span className="text-[#4B6354] font-medium">{item.symbol}</span>
+              <span className="text-[#10251B] font-semibold num-tabular">{item.price}</span>
               <span
                 className={`flex items-center text-[10px] font-semibold ${
-                  item.isPositive ? "text-emerald-400" : "text-rose-400"
+                  item.isPositive ? "text-emerald-600" : "text-rose-600"
                 }`}
               >
                 {item.isPositive ? (
@@ -47,8 +47,8 @@ export function MarketTicker() {
         </div>
 
         {/* Client-side badge */}
-        <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
-          <Shield className="w-3 h-3 text-cyan-400" />
+        <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-[#4B6354] font-mono">
+          <Shield className="w-3 h-3 text-emerald-600" />
           <span>Local Simulation Active</span>
         </div>
       </div>

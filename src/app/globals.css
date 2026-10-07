@@ -2,24 +2,24 @@
 
 @layer base {
   :root {
-    --background: #050B18;
-    --background-surface: #071426;
-    --background-panel: #0A1D35;
-    --background-card: #0D2747;
-    --border-hairline: #0D2747;
-    --border-subtle: #123A63;
-    --border-accent: rgba(59, 130, 246, 0.4);
+    --background: #FFFFFF;
+    --background-surface: #F7FAF8;
+    --background-panel: #F2F7F4;
+    --background-card: #FFFFFF;
+    --border-hairline: #DDE8E1;
+    --border-subtle: #C5D8CD;
+    --border-accent: rgba(16, 185, 129, 0.35);
 
-    --foreground: #F8FAFC;
-    --foreground-muted: #94A3B8;
-    --foreground-dim: #64748B;
+    --foreground: #10251B;
+    --foreground-muted: #4B6354;
+    --foreground-dim: #708A7C;
 
-    --blue-primary: #2563EB;
-    --blue-electric: #3B82F6;
-    --blue-highlight: #60A5FA;
-    --cyan-subtle: #67E8F9;
-    --emerald-positive: #34D399;
-    --rose-negative: #F87171;
+    --green-deep: #0B3D2E;
+    --green-primary: #16A34A;
+    --emerald-accent: #10B981;
+    --mint-soft: #34D399;
+    --green-light: #DCFCE7;
+    --rose-negative: #EF4444;
   }
 
   * {
@@ -31,26 +31,26 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    background-color: #050B18;
-    color: #F8FAFC;
+    background-color: #FFFFFF;
+    color: #10251B;
   }
 
   body {
-    background-color: #050B18;
-    color: #F8FAFC;
+    background-color: #FFFFFF;
+    color: #10251B;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
   }
 
   /* Accessible focus rings */
   :focus-visible {
-    outline: 2px solid #3B82F6;
+    outline: 2px solid #10B981;
     outline-offset: 2px;
   }
 
   /* Luxury range slider */
   input[type="range"] {
-    accent-color: #3B82F6;
+    accent-color: #10B981;
   }
 }
 
@@ -86,57 +86,41 @@
   transform: translateZ(50px);
 }
 
-/* Subtle luxury financial terminal grid */
-.bg-navy-grid {
+/* Subtle luxury light financial terminal grid */
+.bg-light-grid {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(18, 58, 99, 0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(18, 58, 99, 0.22) 1px, transparent 1px);
+    linear-gradient(to right, rgba(16, 37, 27, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 37, 27, 0.04) 1px, transparent 1px);
 }
 
-.bg-navy-radial {
-  background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, rgba(7, 20, 38, 0.8) 60%, #050B18 100%);
+.bg-mint-radial {
+  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.07) 0%, rgba(247, 250, 248, 0.6) 50%, #FFFFFF 100%);
 }
 
-/* Luxury card with rim light and layered depth */
-.luxury-glass {
-  background: rgba(10, 29, 53, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(18, 58, 99, 0.65);
+/* White architectural surface with soft realistic physical depth */
+.white-architectural-surface {
+  background: #FFFFFF;
+  border: 1px solid #DDE8E1;
   box-shadow: 
-    0 15px 35px -10px rgba(5, 11, 24, 0.85),
-    0 0 0 1px rgba(59, 130, 246, 0.08) inset,
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+    0 20px 45px -15px rgba(16, 37, 27, 0.08),
+    0 1px 3px 0 rgba(16, 37, 27, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
 }
 
-.luxury-glass-interactive {
+.white-architectural-interactive {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.luxury-glass-interactive:hover {
-  border-color: rgba(96, 165, 250, 0.45);
+.white-architectural-interactive:hover {
+  border-color: #10B981;
   box-shadow: 
-    0 25px 50px -15px rgba(5, 11, 24, 0.95),
-    0 0 30px -5px rgba(59, 130, 246, 0.3),
-    0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    0 25px 50px -15px rgba(16, 37, 27, 0.12),
+    0 0 25px -5px rgba(16, 185, 129, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 1) inset;
 }
 
-/* Pulse animation for continuous data flow packets */
-@keyframes dataPacketPulse {
-  0% {
-    offset-distance: 0%;
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0.2;
-  }
-}
-
+/* Subtle orbital rotation */
 @keyframes orbitSlow {
   from {
     transform: rotate(0deg);
@@ -147,11 +131,11 @@
 }
 
 .animate-orbit-slow {
-  animation: orbitSlow 24s linear infinite;
+  animation: orbitSlow 28s linear infinite;
 }
 
 .animate-orbit-reverse {
-  animation: orbitSlow 32s linear infinite reverse;
+  animation: orbitSlow 36s linear infinite reverse;
 }
 
 /* Brand Reveal Animation Keyframes */
@@ -187,11 +171,11 @@
 .logo-shimmer {
   background: linear-gradient(
     90deg,
-    #F8FAFC 0%,
-    #F8FAFC 40%,
-    #67E8F9 50%,
-    #F8FAFC 60%,
-    #F8FAFC 100%
+    #10251B 0%,
+    #10251B 40%,
+    #10B981 50%,
+    #10251B 60%,
+    #10251B 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;

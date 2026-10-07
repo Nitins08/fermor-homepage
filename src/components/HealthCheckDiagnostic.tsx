@@ -32,28 +32,28 @@ export function HealthCheckDiagnostic() {
   else score += 5;
 
   let scoreTier = "Healthy & Accelerating";
-  let tierBadge = "text-emerald-400 bg-emerald-950/80 border-emerald-800";
+  let tierBadge = "text-emerald-800 bg-emerald-50 border-emerald-200";
   if (score < 50) {
     scoreTier = "Needs Attention";
-    tierBadge = "text-rose-400 bg-rose-950/80 border-rose-800";
+    tierBadge = "text-rose-700 bg-rose-50 border-rose-200";
   } else if (score < 75) {
     scoreTier = "Balanced Foundation";
-    tierBadge = "text-blue-400 bg-blue-950/80 border-blue-800";
+    tierBadge = "text-emerald-800 bg-emerald-50 border-emerald-200";
   }
 
   return (
-    <section id="health-check" className="py-20 bg-[#050B18] border-b border-[#0D2747]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header with Editorial Restraint */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A1D35] border border-[#123A63] text-blue-300 text-xs font-mono font-medium mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+    <section id="health-check" className="py-12 bg-white">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7FAF8] border border-[#DDE8E1] text-[#0B3D2E] text-xs font-mono font-medium mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>INSTANT DIAGNOSTIC AUDIT</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-semibold text-[#10251B] tracking-tight leading-tight">
             Know where your wealth stands in 60 seconds.
           </h2>
-          <p className="mt-4 text-slate-300 text-base font-light leading-relaxed">
+          <p className="mt-2 text-[#4B6354] text-sm leading-relaxed">
             No registration, phone number collection, or marketing calls. Calibrate your baseline cash flow
             below to evaluate your savings velocity, debt vulnerability, and liquid runway.
           </p>
@@ -62,12 +62,12 @@ export function HealthCheckDiagnostic() {
         {/* Diagnostic Tool Panel */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls Column (7 cols) */}
-          <div className="lg:col-span-7 bg-[#071426] p-6 sm:p-8 rounded-2xl border border-[#123A63] space-y-7 shadow-xl">
+          <div className="lg:col-span-7 bg-[#F7FAF8] p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] space-y-7 shadow-xs">
             {/* Input 1: Monthly Income */}
             <div className="space-y-2.5">
-              <div className="flex justify-between items-center text-sm font-medium text-slate-200">
+              <div className="flex justify-between items-center text-sm font-medium text-[#10251B]">
                 <label htmlFor="income-range">Monthly Take-Home Income</label>
-                <span className="font-mono text-base text-white num-tabular font-bold">
+                <span className="font-mono text-base text-[#0B3D2E] num-tabular font-bold">
                   ₹{monthlyIncome.toLocaleString("en-IN")}
                 </span>
               </div>
@@ -79,9 +79,9 @@ export function HealthCheckDiagnostic() {
                 step={5000}
                 value={monthlyIncome}
                 onChange={(e) => setMonthlyIncome(Number(e.target.value))}
-                className="w-full h-2 bg-[#0A1D35] rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-[#E5ECE7] rounded-lg appearance-none cursor-pointer accent-emerald-600"
               />
-              <div className="flex justify-between text-[11px] text-slate-500 font-mono">
+              <div className="flex justify-between text-[11px] text-[#82998B] font-mono">
                 <span>₹30,000</span>
                 <span>₹2,50,000</span>
                 <span>₹5,00,000+</span>
@@ -90,9 +90,9 @@ export function HealthCheckDiagnostic() {
 
             {/* Input 2: Monthly Investments */}
             <div className="space-y-2.5">
-              <div className="flex justify-between items-center text-sm font-medium text-slate-200">
+              <div className="flex justify-between items-center text-sm font-medium text-[#10251B]">
                 <label htmlFor="invest-range">Monthly Investments & Systematic SIPs</label>
-                <span className="font-mono text-base text-emerald-400 num-tabular font-bold">
+                <span className="font-mono text-base text-emerald-600 num-tabular font-bold">
                   ₹{monthlyInvest.toLocaleString("en-IN")}
                 </span>
               </div>
@@ -104,18 +104,18 @@ export function HealthCheckDiagnostic() {
                 step={2000}
                 value={monthlyInvest}
                 onChange={(e) => setMonthlyInvest(Number(e.target.value))}
-                className="w-full h-2 bg-[#0A1D35] rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-[#E5ECE7] rounded-lg appearance-none cursor-pointer accent-emerald-600"
               />
-              <div className="flex justify-between text-[11px] text-slate-400 font-mono">
+              <div className="flex justify-between text-[11px] text-[#4B6354] font-mono">
                 <span>₹2,000</span>
-                <span className="text-cyan-400 font-semibold">Savings Velocity: {savingsRate}%</span>
+                <span className="text-emerald-700 font-semibold">Savings Velocity: {savingsRate}%</span>
                 <span>₹{monthlyIncome.toLocaleString("en-IN")}</span>
               </div>
             </div>
 
             {/* Input 3: Emergency Fund */}
             <div className="space-y-2.5">
-              <div className="text-sm font-medium text-slate-200">
+              <div className="text-sm font-medium text-[#10251B]">
                 Liquid Emergency Reserve Buffer
               </div>
               <div className="grid grid-cols-3 gap-3 text-xs">
@@ -124,8 +124,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setEmergencyMonths("low")}
                   className={`p-3 rounded-xl border font-mono font-medium transition-all ${
                     emergencyMonths === "low"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   &lt; 2 Months
@@ -135,8 +135,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setEmergencyMonths("mid")}
                   className={`p-3 rounded-xl border font-mono font-medium transition-all ${
                     emergencyMonths === "mid"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   3 - 5 Months
@@ -146,8 +146,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setEmergencyMonths("optimal")}
                   className={`p-3 rounded-xl border font-mono font-medium transition-all ${
                     emergencyMonths === "optimal"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   6+ Months (Optimal)
@@ -157,7 +157,7 @@ export function HealthCheckDiagnostic() {
 
             {/* Input 4: Fixed EMI / Debt Servicing */}
             <div className="space-y-2.5">
-              <div className="text-sm font-medium text-slate-200">
+              <div className="text-sm font-medium text-[#10251B]">
                 Existing Debt & Fixed EMI Outgo
               </div>
               <div className="grid grid-cols-4 gap-2.5 text-xs">
@@ -166,8 +166,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setDebtRatio("none")}
                   className={`p-2.5 rounded-xl border font-mono font-medium transition-all ${
                     debtRatio === "none"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   Zero Debt
@@ -177,8 +177,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setDebtRatio("low")}
                   className={`p-2.5 rounded-xl border font-mono font-medium transition-all ${
                     debtRatio === "low"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   &lt; 25%
@@ -188,8 +188,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setDebtRatio("medium")}
                   className={`p-2.5 rounded-xl border font-mono font-medium transition-all ${
                     debtRatio === "medium"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   25% - 45%
@@ -199,8 +199,8 @@ export function HealthCheckDiagnostic() {
                   onClick={() => setDebtRatio("high")}
                   className={`p-2.5 rounded-xl border font-mono font-medium transition-all ${
                     debtRatio === "high"
-                      ? "bg-blue-600 text-white border-blue-400 shadow-md"
-                      : "bg-[#0A1D35] text-slate-300 border-[#123A63] hover:bg-[#0D2747]"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                      : "bg-white text-[#4B6354] border-[#DDE8E1] hover:bg-[#EEF5F1] hover:text-[#10251B]"
                   }`}
                 >
                   &gt; 45% (High)
@@ -210,10 +210,10 @@ export function HealthCheckDiagnostic() {
           </div>
 
           {/* Results Scorecard Column (5 cols) */}
-          <div className="lg:col-span-5 bg-[#071426] p-6 sm:p-8 rounded-2xl border border-[#123A63] shadow-xl space-y-6">
+          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-[#DDE8E1] shadow-xs space-y-6">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#4B6354]">
                   Resilience Score
                 </span>
                 <span className={`text-xs font-mono font-semibold px-3 py-1 rounded-full border ${tierBadge}`}>
@@ -221,21 +221,21 @@ export function HealthCheckDiagnostic() {
                 </span>
               </div>
               <div className="flex items-baseline gap-2 mt-3">
-                <span className="text-6xl font-extrabold tracking-tight text-white num-tabular font-mono">
+                <span className="text-6xl font-extrabold tracking-tight text-[#10251B] num-tabular font-mono">
                   {score}
                 </span>
-                <span className="text-slate-500 font-semibold text-xl">/ 100</span>
+                <span className="text-[#82998B] font-semibold text-xl">/ 100</span>
               </div>
             </div>
 
             {/* Health Meter Bar */}
-            <div className="w-full bg-[#050B18] h-3 rounded-full overflow-hidden border border-[#0D2747]">
+            <div className="w-full bg-[#EEF5F1] h-3 rounded-full overflow-hidden border border-[#DDE8E1]">
               <div
                 className={`h-full transition-all duration-300 rounded-full ${
                   score >= 75
                     ? "bg-emerald-500"
                     : score >= 50
-                    ? "bg-blue-500"
+                    ? "bg-emerald-600"
                     : "bg-rose-500"
                 }`}
                 style={{ width: `${score}%` }}
@@ -245,14 +245,14 @@ export function HealthCheckDiagnostic() {
             {/* Key Findings List */}
             <div className="space-y-4 pt-2 text-xs">
               <div className="flex items-start gap-3">
-                <div className="mt-0.5 p-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
+                <div className="mt-0.5 p-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
                   <Check className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-white">
+                  <span className="font-semibold text-[#10251B]">
                     Savings Velocity: {savingsRate}% of take-home
                   </span>
-                  <p className="text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-[#4B6354] mt-1 leading-relaxed">
                     {savingsRate >= 30
                       ? "Exceptional savings velocity. You are investing above the recommended 25% benchmark for Indian urban professionals."
                       : "Consider stepping up your monthly SIP by 5% annually to reach a 30% savings cushion."}
@@ -264,8 +264,8 @@ export function HealthCheckDiagnostic() {
                 <div
                   className={`mt-0.5 p-1 rounded-full ${
                     emergencyMonths === "optimal"
-                      ? "bg-emerald-950 text-emerald-400 border border-emerald-800"
-                      : "bg-amber-950 text-amber-400 border border-amber-800"
+                      ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                      : "bg-amber-100 text-amber-800 border border-amber-200"
                   }`}
                 >
                   {emergencyMonths === "optimal" ? (
@@ -275,7 +275,7 @@ export function HealthCheckDiagnostic() {
                   )}
                 </div>
                 <div>
-                  <span className="font-semibold text-white">
+                  <span className="font-semibold text-[#10251B]">
                     Liquid Runway:{" "}
                     {emergencyMonths === "optimal"
                       ? "6+ Months Secured"
@@ -283,7 +283,7 @@ export function HealthCheckDiagnostic() {
                       ? "3-5 Months (Acceptable)"
                       : "Less than 2 Months (Vulnerable)"}
                   </span>
-                  <p className="text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-[#4B6354] mt-1 leading-relaxed">
                     {emergencyMonths === "optimal"
                       ? "Strong cushion against market dips or unexpected disruptions without forcing premature equity redemption."
                       : "Build emergency cash in liquid or arbitrage funds before expanding high-volatility mid-cap exposure."}
@@ -292,10 +292,10 @@ export function HealthCheckDiagnostic() {
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#0D2747]">
+            <div className="pt-3 border-t border-[#DDE8E1]">
               <a
                 href="#calculators"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500 active:bg-blue-700 transition-colors shadow-md shadow-blue-900/30 border border-blue-400/30"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-xs"
               >
                 <span>Model SIP & Prepayment In Calculator Lab</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -20,17 +20,17 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-[#050B18]/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-5xl h-full bg-[#050B18] border-l border-[#123A63] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
+    <div className="fixed inset-0 z-50 flex justify-end bg-[#10251B]/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-5xl h-full bg-white border-l border-[#DDE8E1] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#071426] border-b border-[#0D2747] text-white">
+        <div className="flex items-center justify-between px-6 py-4 bg-[#F7FAF8] border-b border-[#DDE8E1] text-[#10251B]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0A1D35] border border-[#123A63] flex items-center justify-center text-cyan-400 font-mono font-bold text-sm">
+            <div className="w-8 h-8 rounded-lg bg-white border border-[#DDE8E1] flex items-center justify-center text-[#0B3D2E] font-mono font-bold text-sm shadow-xs">
               F
             </div>
             <div>
-              <h3 className="font-semibold text-base leading-tight">Fermor Institutional Tools Suite</h3>
-              <p className="text-[11px] text-slate-400 font-mono">
+              <h3 className="font-semibold text-base leading-tight text-[#0B3D2E]">Fermor Institutional Tools Suite</h3>
+              <p className="text-[11px] text-[#4B6354] font-mono">
                 100% Client-Side Privacy • Deterministic Mathematical Execution
               </p>
             </div>
@@ -39,7 +39,7 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-lg bg-[#0A1D35] hover:bg-[#0D2747] border border-[#123A63] text-slate-300 hover:text-white transition-colors"
+            className="p-2 rounded-lg bg-white hover:bg-[#EEF5F1] border border-[#DDE8E1] text-[#4B6354] hover:text-[#10251B] transition-colors"
             aria-label="Close tools suite"
           >
             <X className="w-5 h-5" />
@@ -47,7 +47,7 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center gap-2 px-6 py-2.5 bg-[#071426]/60 border-b border-[#0D2747] overflow-x-auto no-scrollbar font-mono text-xs">
+        <div className="flex items-center gap-2 px-6 py-2.5 bg-[#F2F7F4] border-b border-[#DDE8E1] overflow-x-auto no-scrollbar font-mono text-xs">
           {[
             { id: "calculators", label: "Calculator Lab", icon: Calculator },
             { id: "health", label: "Health Diagnostic", icon: Activity },
@@ -64,8 +64,8 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-xs font-semibold"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-[#0A1D35]"
+                    ? "bg-emerald-600 text-white shadow-xs font-semibold"
+                    : "text-[#4B6354] hover:text-[#10251B] hover:bg-white border border-transparent hover:border-[#DDE8E1]"
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -76,7 +76,7 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
         </div>
 
         {/* Scrollable Tool Body */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8 bg-[#050B18]">
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8 bg-white">
           {activeTab === "calculators" && <CalculatorLab />}
           {activeTab === "health" && <HealthCheckDiagnostic />}
           {activeTab === "tax" && <UnderstandSection />}
@@ -85,12 +85,12 @@ export function ToolsDrawer({ isOpen, onClose, initialTab = "calculators" }: Too
         </div>
 
         {/* Drawer Footer */}
-        <div className="px-6 py-3 bg-[#071426] border-t border-[#0D2747] flex items-center justify-between text-[11px] font-mono text-slate-400">
+        <div className="px-6 py-3 bg-[#F7FAF8] border-t border-[#DDE8E1] flex items-center justify-between text-[11px] font-mono text-[#4B6354]">
           <span>Client-side execution verified • Zero server storage</span>
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors font-sans font-semibold text-xs"
+            className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-sans font-semibold text-xs shadow-xs"
           >
             Return to 3D Journey
           </button>

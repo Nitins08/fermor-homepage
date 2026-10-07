@@ -19,7 +19,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#050B18] text-slate-100 selection:bg-blue-600 selection:text-white">
+    <div className="flex flex-col min-h-screen bg-white text-[#10251B] selection:bg-emerald-100 selection:text-emerald-900">
       {/* 1. Real-time Indian Market Ticker (NSE / BSE / Gold / VIX) */}
       <MarketTicker />
 
