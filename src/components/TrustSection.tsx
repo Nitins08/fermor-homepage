@@ -31,7 +31,7 @@ export default function TrustSection() {
   ];
 
   return (
-    <section id="trust" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+    <section id="trust" className="w-full py-16 sm:py-20 lg:py-24 border-t border-black/[0.06] scroll-mt-28">
       <div className="bg-primary text-white rounded-xl p-8 sm:p-12 lg:p-16 shadow-xl relative overflow-hidden">
         {/* Subtle grid pattern background */}
         <div

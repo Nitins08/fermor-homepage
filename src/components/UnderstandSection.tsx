@@ -113,7 +113,7 @@ export default function UnderstandSection() {
   };
 
   return (
-    <section id="understand" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+    <section id="understand" className="w-full py-16 sm:py-20 lg:py-24 border-t border-black/[0.06] scroll-mt-28">
       {/* Editorial Header */}
       <div className="max-w-3xl mb-14">
         <div className="font-mono text-xs text-[#006C49] font-semibold uppercase tracking-wider mb-3">

@@ -75,7 +75,7 @@ export default function FinancialProblem() {
   };
 
   return (
-    <section id="problem" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+    <section id="problem" className="w-full py-16 sm:py-20 lg:py-24 scroll-mt-28">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
         {/* Narrative Left Column */}
         <div className="lg:col-span-5">

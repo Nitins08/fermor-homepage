@@ -11,7 +11,7 @@ export default function IntelligenceSection() {
   };
 
   return (
-    <section id="intelligence" className="w-full py-24 px-4 sm:px-6 lg:px-12 max-w-[1440px] mx-auto border-t border-black/[0.06]">
+    <section id="intelligence" className="w-full py-16 sm:py-20 lg:py-24 border-t border-black/[0.06] scroll-mt-28">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
         <div>
           <div className="font-mono text-xs text-[#006C49] font-semibold uppercase tracking-wider mb-3">
